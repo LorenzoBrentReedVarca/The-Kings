@@ -115,6 +115,7 @@
     </nav>
 
     <div class="header__actions">
+      <div class="locpick" data-location-picker hidden></div>
       <span class="status-pill" data-status-pill>
         <span class="status-pill__dot"></span>
         <span data-status-label>Closed</span>
@@ -143,6 +144,7 @@
     <a class="drawer__link" href="contact.html"><span>07</span>Contact</a>
   </nav>
   <div class="drawer__foot">
+    <div class="locpick" data-location-picker hidden></div>
     <span class="status-pill" data-status-pill style="justify-self:start">
       <span class="status-pill__dot"></span>
       <span data-status-label>Closed</span>
@@ -395,7 +397,7 @@
           </ul>
           <div class="row mt-3">
             <a class="btn btn--gold" href="reservations.html">Send an enquiry <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></a>
-            <a class="btn btn--ghost" href="https://wa.me/971542921626?text=Hi%20The Royals%20Elite%20Lounge%2C%20I%27d%20like%20to%20enquire%20about%20a%20private%20event." target="_blank" rel="noopener">
+            <a class="btn btn--ghost" data-loc-href="whatsapp" href="https://wa.me/971542921626?text=Hi%20The Royals%20Elite%20Lounge%2C%20I%27d%20like%20to%20enquire%20about%20a%20private%20event." target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24"><use href="#i-whatsapp"></use></svg> WhatsApp the team
             </a>
           </div>
@@ -464,7 +466,7 @@
         <div class="socials">
           <a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#i-instagram"></use></svg></a>
           <a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><use href="#i-facebook"></use></svg></a>
-          <a href="https://wa.me/971542921626" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><use href="#i-whatsapp"></use></svg></a>
+          <a href="https://wa.me/971542921626" data-loc-href="whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><use href="#i-whatsapp"></use></svg></a>
           <a href="tel:+971542921626" aria-label="Call us"><svg viewBox="0 0 24 24"><use href="#i-phone"></use></svg></a>
         </div>
       </div>
@@ -485,13 +487,13 @@
       <div class="footer__col">
         <h4>Opening hours</h4>
         <div class="hours-list">
-          <div data-day="1"><span>Monday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="2"><span>Tuesday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="3"><span>Wednesday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="4"><span>Thursday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="5"><span>Friday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="6"><span>Saturday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="0"><span>Sunday</span><b>9:00 PM – 4:00 AM</b></div>
+          <div data-day="1"><span>Monday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="2"><span>Tuesday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="3"><span>Wednesday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="4"><span>Thursday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="5"><span>Friday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="6"><span>Saturday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="0"><span>Sunday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
         </div>
         <p class="small muted mt-1">All times Gulf Standard Time (UTC+4).</p>
       </div>
@@ -509,7 +511,7 @@
         </form>
         <div class="contact-card mt-3" style="padding:1.1rem">
           <h4 style="margin:0">Reservations</h4>
-          <p><a href="tel:+971542921626">+971 54 292 1626</a></p>
+          <p><a href="tel:+971542921626" data-loc-href="tel" data-loc="phone">+971 54 292 1626</a></p>
           <p class="small muted" style="margin:0">Grand Excelsior Hotel, Al Barsha 1, Dubai</p>
         </div>
       </div>
@@ -529,7 +531,7 @@
 
 <!-- ===================== FLOATING ACTIONS ===================== -->
 <div class="float-stack">
-  <a class="fab fab--wa" href="https://wa.me/971542921626" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <a class="fab fab--wa" href="https://wa.me/971542921626" data-loc-href="whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24"><use href="#i-whatsapp"></use></svg>
     <span class="fab__tip">Book on WhatsApp</span>
   </a>

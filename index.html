@@ -146,6 +146,7 @@
     </nav>
 
     <div class="header__actions">
+      <div class="locpick" data-location-picker hidden></div>
       <span class="status-pill" data-status-pill>
         <span class="status-pill__dot"></span>
         <span data-status-label>Closed</span>
@@ -174,6 +175,7 @@
     <a class="drawer__link" href="contact.html"><span>07</span>Contact</a>
   </nav>
   <div class="drawer__foot">
+    <div class="locpick" data-location-picker hidden></div>
     <span class="status-pill" data-status-pill style="justify-self:start">
       <span class="status-pill__dot"></span>
       <span data-status-label>Closed</span>
@@ -233,7 +235,7 @@
       </div>
 
       <dl class="hero__facts">
-        <div class="hero__fact"><dt>Doors</dt><dd>9:00 PM — 4:00 AM</dd></div>
+        <div class="hero__fact"><dt>Doors</dt><dd data-loc="hours">9:00 PM – 4:00 AM</dd></div>
         <div class="hero__fact"><dt>Shows</dt><dd>Live, every night</dd></div>
         <div class="hero__fact"><dt>Dubai time</dt><dd><span data-dubai-clock>--:--</span> GST</dd></div>
         <div class="hero__fact"><dt>Entry</dt><dd>21+ with photo ID</dd></div>
@@ -709,22 +711,22 @@
             <div class="contact-card">
               <span class="contact-card__icon"><svg viewBox="0 0 24 24"><use href="#i-pin"></use></svg></span>
               <h4>Address</h4>
-              <p>Grand Excelsior Hotel<br>60th Street, Al Barsha 1<br>Dubai, UAE</p>
+              <p data-loc="address">Grand Excelsior Hotel<br>60th Street, Al Barsha 1<br>Dubai, UAE</p>
             </div>
             <div class="contact-card">
               <span class="contact-card__icon"><svg viewBox="0 0 24 24"><use href="#i-clock"></use></svg></span>
               <h4>Opening hours</h4>
-              <p>Daily, 9:00 PM – 4:00 AM<br><span class="muted small">Gulf Standard Time (UTC+4)</span></p>
+              <p>Daily, <span data-loc="hours">9:00 PM – 4:00 AM</span><br><span class="muted small">Gulf Standard Time (UTC+4)</span></p>
             </div>
             <div class="contact-card">
               <span class="contact-card__icon"><svg viewBox="0 0 24 24"><use href="#i-metro"></use></svg></span>
               <h4>Nearest metro</h4>
-              <p>Mall of the Emirates, Red Line<br><span class="muted small">About a ten-minute walk</span></p>
+              <p><span data-loc="metroFull">Mall of the Emirates, Red Line</span><br><span class="muted small" data-loc="metroWalk">about a ten-minute walk</span></p>
             </div>
             <div class="contact-card">
               <span class="contact-card__icon"><svg viewBox="0 0 24 24"><use href="#i-phone"></use></svg></span>
               <h4>Reservations</h4>
-              <p><a href="tel:+971542921626">+971 54 292 1626</a><br><a href="https://wa.me/971542921626" target="_blank" rel="noopener">Message on WhatsApp</a></p>
+              <p><a href="tel:+971542921626" data-loc-href="tel" data-loc="phone">+971 54 292 1626</a><br><a href="https://wa.me/971542921626" data-loc-href="whatsapp" target="_blank" rel="noopener">Message on WhatsApp</a></p>
             </div>
           </div>
         </div>
@@ -733,15 +735,15 @@
           <div class="map">
             <div class="map__badge">
               <strong>The Royals</strong>
-              <span>Grand Excelsior Hotel, Al Barsha 1, Dubai</span>
+              <span data-loc="addressLine">Grand Excelsior Hotel, Al Barsha 1, Dubai</span>
             </div>
-            <iframe
-              src="https://www.google.com/maps?q=Grand%20Excelsior%20Hotel%20Al%20Barsha%2C%20Dubai&output=embed"
+            <iframe data-loc-src="map"
+              data-loc-src="map" src="https://www.google.com/maps?q=Grand%20Excelsior%20Hotel%20Al%20Barsha%2C%20Dubai&output=embed"
               title="Map showing The Royals at Grand Excelsior Hotel, Al Barsha 1, Dubai"
               loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
           </div>
           <div class="row mt-2">
-            <a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&query=Grand+Excelsior+Hotel+Al+Barsha+Dubai" target="_blank" rel="noopener">
+            <a class="btn btn--ghost btn--sm" href="https://www.google.com/maps/search/?api=1&query=Grand+Excelsior+Hotel+Al+Barsha+Dubai" data-loc-href="maps" target="_blank" rel="noopener">
               Open in Google Maps <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg>
             </a>
             <span class="chip chip--muted"><svg style="width:12px;height:12px" viewBox="0 0 24 24"><use href="#i-car"></use></svg> Free parking</span>
@@ -809,13 +811,13 @@
       <div class="footer__col">
         <h4>Opening hours</h4>
         <div class="hours-list">
-          <div data-day="1"><span>Monday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="2"><span>Tuesday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="3"><span>Wednesday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="4"><span>Thursday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="5"><span>Friday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="6"><span>Saturday</span><b>9:00 PM – 4:00 AM</b></div>
-          <div data-day="0"><span>Sunday</span><b>9:00 PM – 4:00 AM</b></div>
+          <div data-day="1"><span>Monday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="2"><span>Tuesday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="3"><span>Wednesday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="4"><span>Thursday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="5"><span>Friday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="6"><span>Saturday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
+          <div data-day="0"><span>Sunday</span><b data-loc="hours">9:00 PM – 4:00 AM</b></div>
         </div>
         <p class="small muted mt-1">All times Gulf Standard Time (UTC+4).</p>
       </div>
@@ -833,7 +835,7 @@
         </form>
         <div class="contact-card mt-3" style="padding:1.1rem">
           <h4 style="margin:0">Reservations</h4>
-          <p><a href="tel:+971542921626">+971 54 292 1626</a></p>
+          <p><a href="tel:+971542921626" data-loc-href="tel" data-loc="phone">+971 54 292 1626</a></p>
           <p class="small muted" style="margin:0">Grand Excelsior Hotel, Al Barsha 1, Dubai</p>
         </div>
       </div>

@@ -6,19 +6,102 @@
   'use strict';
 
   /* ------------------------------------------------------------------
-     Venue constants — single source of truth
+     Brand-wide constants
      ------------------------------------------------------------------ */
-  var VENUE = {
-    name: "The Royals",
-    tz: 'Asia/Dubai',              // GST, UTC+4, no daylight saving
-    phone: '+971 54 292 1626',
-    phoneRaw: '+971542921626',
-    whatsapp: '971542921626',
-    openHour: 21, openMinute: 0,   // 9:00 PM
-    closeHour: 4,  closeMinute: 0, // 4:00 AM (next day)
-    minAge: 21,                    // Dubai licensed-venue entry age
+  var BRAND = {
+    name: 'The Royals',
+    tz: 'Asia/Dubai',   // GST, UTC+4, no daylight saving anywhere in the UAE
+    minAge: 21,         // Dubai licensed-venue entry age
     menuPdf: 'https://kingselitelounge.com/wp-content/uploads/2025/03/KINGS-MENU.pdf'
   };
+
+  /* ------------------------------------------------------------------
+     LOCATIONS — the single source of truth for every venue.
+
+     Everything that differs between branches lives here: phone, WhatsApp,
+     door times, last entry, metro, parking and the map pin. Add another
+     object to this array and the whole site becomes multi-branch on its
+     own: the picker appears in the header, drawer, contact page and
+     booking form, the open/closed clock follows the chosen venue, and
+     the reservation goes to that branch's WhatsApp. Nothing else to edit.
+
+     To add a branch, copy the block below and fill in real details:
+
+       {
+         id: 'deira',                       // url-safe, must be unique
+         name: 'Deira',                     // short label for the picker
+         venue: 'Hotel name',
+         address: ['Hotel name', 'Street, Area', 'Dubai, UAE'],
+         mapQuery: 'Hotel name Deira Dubai',
+         phone: '+971 5X XXX XXXX',
+         phoneRaw: '+9715XXXXXXXX',
+         whatsapp: '9715XXXXXXXX',
+         open: { hour: 21, minute: 0 },
+         close: { hour: 4, minute: 0 },
+         lastEntry: '3:00 AM',
+         metro: 'Station name', metroLine: 'Green Line',
+         metroWalk: 'about a five-minute walk',
+         parking: 'Valet available'
+       }
+     ------------------------------------------------------------------ */
+  var LOCATIONS = [
+    {
+      id: 'al-barsha',
+      name: 'Al Barsha',
+      venue: 'Grand Excelsior Hotel',
+      address: ['Grand Excelsior Hotel', '60th Street, Al Barsha 1', 'Dubai, UAE'],
+      mapQuery: 'Grand Excelsior Hotel Al Barsha Dubai',
+      phone: '+971 54 292 1626',
+      phoneRaw: '+971542921626',
+      whatsapp: '971542921626',
+      open:  { hour: 21, minute: 0 },   // 9:00 PM
+      close: { hour: 4,  minute: 0 },   // 4:00 AM, next day
+      lastEntry: '3:00 AM',
+      metro: 'Mall of the Emirates',
+      metroLine: 'Red Line',
+      metroWalk: 'about a ten-minute walk',
+      parking: 'Free on-site parking'
+    }
+  ];
+
+  var LOC_KEY = 'tr-location';
+
+  function locationById(id) {
+    for (var i = 0; i < LOCATIONS.length; i++) {
+      if (LOCATIONS[i].id === id) return LOCATIONS[i];
+    }
+    return null;
+  }
+
+  /* The branch the visitor is currently looking at. Remembered per browser. */
+  function currentLocation() {
+    var saved = null;
+    try { saved = localStorage.getItem(LOC_KEY); } catch (e) {}
+    return locationById(saved) || LOCATIONS[0];
+  }
+
+  function setLocation(id) {
+    if (!locationById(id)) return;
+    try { localStorage.setItem(LOC_KEY, id); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('location:change', { detail: { id: id } }));
+  }
+
+  var multiSite = LOCATIONS.length > 1;
+
+  /* Door times as minutes past midnight, for the branch in view. */
+  function openMinutes(loc)  { loc = loc || currentLocation(); return loc.open.hour * 60 + loc.open.minute; }
+  function closeMinutes(loc) { loc = loc || currentLocation(); return loc.close.hour * 60 + loc.close.minute; }
+
+  function hoursLabel(loc) {
+    loc = loc || currentLocation();
+    return time12(loc.open.hour, loc.open.minute) + ' – ' + time12(loc.close.hour, loc.close.minute);
+  }
+
+  function time12(h, m) {
+    var suffix = h >= 12 ? 'PM' : 'AM';
+    var h12 = h % 12 || 12;
+    return h12 + ':' + pad(m) + ' ' + suffix;
+  }
 
   function mq(query) {
     try { return !!(window.matchMedia && window.matchMedia(query).matches); }
@@ -50,7 +133,7 @@
   function dubaiParts(date) {
     var d = date || new Date();
     var fmt = new Intl.DateTimeFormat('en-GB', {
-      timeZone: VENUE.tz,
+      timeZone: BRAND.tz,
       year: 'numeric', month: '2-digit', day: '2-digit',
       hour: '2-digit', minute: '2-digit', second: '2-digit',
       hour12: false, weekday: 'short'
@@ -78,7 +161,7 @@
   function dubaiOffsetMinutes(date) {
     var d = date || new Date();
     var utc = new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
-    var loc = new Date(d.toLocaleString('en-US', { timeZone: VENUE.tz }));
+    var loc = new Date(d.toLocaleString('en-US', { timeZone: BRAND.tz }));
     return Math.round((loc - utc) / 60000);
   }
 
@@ -89,27 +172,25 @@
     return new Date(guess - off * 60000);
   }
 
-  var OPEN_MIN  = VENUE.openHour * 60 + VENUE.openMinute;   // 1260
-  var CLOSE_MIN = VENUE.closeHour * 60 + VENUE.closeMinute; // 240
-
-  function venueStatus() {
+  /* Open/closed and the next milestone, for whichever branch is in view.
+     Branches can keep different door times, so nothing here is a constant. */
+  function venueStatus(loc) {
+    loc = loc || currentLocation();
+    var openMin = openMinutes(loc);
+    var closeMin = closeMinutes(loc);
     var p = dubaiParts();
     var mins = p.minutesOfDay;
-    var isOpen = mins >= OPEN_MIN || mins < CLOSE_MIN;
+    var isOpen = mins >= openMin || mins < closeMin;
     var target;
 
     if (isOpen) {
-      // next close: today 04:00 if we're in the small hours, else tomorrow 04:00
-      if (mins < CLOSE_MIN) {
-        target = dubaiDate(p.year, p.month, p.day, VENUE.closeHour, VENUE.closeMinute);
-      } else {
-        var t = new Date(dubaiDate(p.year, p.month, p.day, VENUE.closeHour, VENUE.closeMinute).getTime() + 864e5);
-        target = t;
-      }
+      // next close: today's closing hour if we're in the small hours, else tomorrow's
+      var closeToday = dubaiDate(p.year, p.month, p.day, loc.close.hour, loc.close.minute);
+      target = mins < closeMin ? closeToday : new Date(closeToday.getTime() + 864e5);
     } else {
-      target = dubaiDate(p.year, p.month, p.day, VENUE.openHour, VENUE.openMinute);
+      target = dubaiDate(p.year, p.month, p.day, loc.open.hour, loc.open.minute);
     }
-    return { isOpen: isOpen, target: target, parts: p };
+    return { isOpen: isOpen, target: target, parts: p, location: loc };
   }
 
   function dubaiClockString() {
@@ -395,6 +476,129 @@
       es.forEach(function (e) { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
     }, { threshold: 0.5 });
     nums.forEach(function (n) { io.observe(n); });
+  });
+
+  /* ==================================================================
+     9b. LOCATIONS — render the branch in view, everywhere at once
+
+     Any element carrying data-loc / data-loc-href / data-loc-src is filled
+     from the selected branch. Add a venue to LOCATIONS and the picker
+     appears by itself; with a single venue it stays hidden and the page
+     simply reads as that one venue.
+     ================================================================== */
+  function locMetroFull(loc) {
+    if (!loc.metro) return '';
+    return loc.metro + (loc.metroLine ? ', ' + loc.metroLine : '');
+  }
+
+  function mapsSearchUrl(loc) {
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc.mapQuery);
+  }
+  function mapsEmbedUrl(loc) {
+    return 'https://www.google.com/maps?q=' + encodeURIComponent(loc.mapQuery) + '&output=embed';
+  }
+
+  function applyLocation(loc) {
+    loc = loc || currentLocation();
+
+    var text = {
+      name:       loc.name,
+      venue:      loc.venue,
+      area:       loc.name,
+      addressLine: loc.address.join(', '),
+      // everything after the venue name, for places that already show it above
+      street:     loc.address.slice(1).join(', '),
+      phone:      loc.phone,
+      hours:      hoursLabel(loc),
+      doors:      time12(loc.open.hour, loc.open.minute),
+      closes:     time12(loc.close.hour, loc.close.minute),
+      lastEntry:  loc.lastEntry,
+      metro:      loc.metro,
+      metroLine:  loc.metroLine,
+      metroFull:  locMetroFull(loc),
+      metroWalk:  loc.metroWalk,
+      parking:    loc.parking
+    };
+
+    $$('[data-loc]').forEach(function (el) {
+      var key = el.getAttribute('data-loc');
+      if (key === 'address') { el.innerHTML = loc.address.join('<br>'); return; }
+      if (Object.prototype.hasOwnProperty.call(text, key) && text[key] != null) {
+        el.textContent = text[key];
+      }
+    });
+
+    $$('[data-loc-href]').forEach(function (el) {
+      var kind = el.getAttribute('data-loc-href');
+      if (kind === 'tel') {
+        el.setAttribute('href', 'tel:' + loc.phoneRaw);
+      } else if (kind === 'whatsapp') {
+        // Keep any prefilled ?text= message when swapping the number over.
+        var existing = el.getAttribute('href') || '';
+        var q = existing.indexOf('?');
+        el.setAttribute('href', 'https://wa.me/' + loc.whatsapp + (q > -1 ? existing.slice(q) : ''));
+      } else if (kind === 'maps') {
+        el.setAttribute('href', mapsSearchUrl(loc));
+      }
+    });
+
+    $$('[data-loc-src="map"]').forEach(function (el) {
+      var next = mapsEmbedUrl(loc);
+      if (el.getAttribute('src') !== next) el.setAttribute('src', next);
+      el.setAttribute('title', 'Map showing ' + BRAND.name + ' at ' + loc.address.join(', '));
+    });
+
+    document.documentElement.setAttribute('data-location', loc.id);
+  }
+
+  function renderPickers() {
+    $$('[data-location-picker]').forEach(function (host) {
+      // A picker for one venue is just noise.
+      if (!multiSite) { host.hidden = true; return; }
+      host.hidden = false;
+      if (host.getAttribute('data-built')) return;
+
+      var current = currentLocation();
+      host.setAttribute('role', 'group');
+      host.setAttribute('aria-label', 'Choose a venue');
+      host.innerHTML = '';
+
+      LOCATIONS.forEach(function (loc) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'locpick__btn' + (loc.id === current.id ? ' is-active' : '');
+        b.setAttribute('data-loc-id', loc.id);
+        b.setAttribute('aria-pressed', loc.id === current.id ? 'true' : 'false');
+        b.innerHTML = '<span class="locpick__name">' + loc.name + '</span>' +
+                      '<span class="locpick__meta">' + loc.venue + '</span>';
+        on(b, 'click', function () { setLocation(loc.id); });
+        host.appendChild(b);
+      });
+      host.setAttribute('data-built', '1');
+    });
+  }
+
+  function syncPickers(loc) {
+    $$('[data-location-picker] .locpick__btn').forEach(function (b) {
+      var active = b.getAttribute('data-loc-id') === loc.id;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  safe('locations', function () {
+    // Hide anything that only makes sense with more than one venue.
+    $$('[data-multi-only]').forEach(function (el) { el.hidden = !multiSite; });
+
+    renderPickers();
+    applyLocation();
+
+    on(document, 'location:change', function () {
+      var loc = currentLocation();
+      applyLocation(loc);
+      syncPickers(loc);
+      document.dispatchEvent(new CustomEvent('location:applied', { detail: { id: loc.id } }));
+    });
   });
 
   /* ==================================================================
@@ -805,23 +1009,87 @@
       if (!dateInput.value) dateInput.value = todayISO;
     }
 
-    /* --- arrival time: only within venue hours --- */
-    var timeSelect = form.querySelector('select[name="time"]');
-    if (timeSelect && !timeSelect.options.length) {
-      var slots = [];
-      for (var m = OPEN_MIN; m <= 24 * 60 + CLOSE_MIN - 60; m += 30) {
-        var mm = m % (24 * 60);
-        slots.push(pad(Math.floor(mm / 60)) + ':' + pad(mm % 60));
+    /* --- venue choice ---
+       Branches can differ in door times, so the arrival list is rebuilt
+       whenever the chosen venue changes. With one venue the picker stays
+       hidden and a hidden input still carries the id through to the booking. */
+    var locHost = $('[data-location-field]', form);
+
+    function selectedLocation() {
+      var picked = form.querySelector('input[name="location"]:checked') ||
+                   form.querySelector('input[name="location"]');
+      return (picked && locationById(picked.value)) || currentLocation();
+    }
+
+    function buildLocationField() {
+      if (!locHost) return;
+      locHost.innerHTML = '';
+
+      if (!multiSite) {
+        var hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = 'location';
+        hidden.value = LOCATIONS[0].id;
+        locHost.appendChild(hidden);
+        return;
       }
+
+      var active = currentLocation();
+      LOCATIONS.forEach(function (l, i) {
+        var id = 'r-loc-' + l.id;
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'location';
+        input.id = id;
+        input.value = l.id;
+        if (i === 0) input.required = true;
+        if (l.id === active.id) input.checked = true;
+
+        var label = document.createElement('label');
+        label.setAttribute('for', id);
+        label.className = 'locfield__card';
+        label.innerHTML =
+          '<span class="locfield__name">' + l.name + '</span>' +
+          '<span class="locfield__venue">' + l.venue + '</span>' +
+          '<span class="locfield__meta">Doors ' + time12(l.open.hour, l.open.minute) +
+          ' · ' + locMetroFull(l) + '</span>';
+
+        on(input, 'change', function () {
+          setLocation(l.id);
+          buildTimeSlots(l);
+        });
+
+        locHost.appendChild(input);
+        locHost.appendChild(label);
+      });
+    }
+
+    /* --- arrival time: only within the chosen venue's hours --- */
+    var timeSelect = form.querySelector('select[name="time"]');
+
+    function buildTimeSlots(loc) {
+      if (!timeSelect) return;
+      loc = loc || selectedLocation();
+      var keep = timeSelect.value;
+      timeSelect.innerHTML = '';
+
       var ph = new Option('Select arrival time', '');
       ph.disabled = true; ph.selected = true;
       timeSelect.appendChild(ph);
-      slots.forEach(function (s) {
-        var hh = parseInt(s.split(':')[0], 10);
-        var label = s + (hh < 12 ? '  (after midnight)' : '');
-        timeSelect.appendChild(new Option(label, s));
-      });
+
+      // Last bookable arrival is an hour before close.
+      for (var m = openMinutes(loc); m <= 24 * 60 + closeMinutes(loc) - 60; m += 30) {
+        var mm = m % (24 * 60);
+        var value = pad(Math.floor(mm / 60)) + ':' + pad(mm % 60);
+        var hh = Math.floor(mm / 60);
+        timeSelect.appendChild(new Option(value + (hh < 12 ? '  (after midnight)' : ''), value));
+      }
+      // Keep the guest's choice if that time still exists at the new venue.
+      if (keep) timeSelect.value = keep;
     }
+
+    buildLocationField();
+    buildTimeSlots();
 
     function paint() {
       sets.forEach(function (fs, n) { fs.classList.toggle('is-active', n === idx); });
@@ -866,7 +1134,9 @@
       var wrap = $('[data-review]', form);
       if (!wrap) return;
       var d = data();
+      var loc = locationById(d.location) || currentLocation();
       var rows = [
+        ['Venue', loc.venue + ', ' + loc.name],
         ['Name', d.name || '—'],
         ['Phone', d.phone || '—'],
         ['Email', d.email || '—'],
@@ -901,9 +1171,14 @@
       var d = data();
       if (btnSend) { btnSend.classList.add('is-busy'); btnSend.textContent = 'Sending…'; }
 
+      // Route the request to the branch the guest chose, and name it in the message
+      // so the host team never has to guess which door the booking is for.
+      var loc = locationById(d.location) || currentLocation();
+
       var lines = [
-        'TABLE RESERVATION — The Royals',
+        'TABLE RESERVATION — ' + BRAND.name + ', ' + loc.name,
         '',
+        'Venue: ' + loc.venue + ', ' + loc.name,
         'Name: ' + d.name,
         'Phone: ' + d.phone,
         'Email: ' + (d.email || '—'),
@@ -914,7 +1189,7 @@
         'Occasion: ' + (d.occasion || '—'),
         'Notes: ' + (d.notes || '—')
       ];
-      var wa = 'https://wa.me/' + VENUE.whatsapp + '?text=' + encodeURIComponent(lines.join('\n'));
+      var wa = 'https://wa.me/' + loc.whatsapp + '?text=' + encodeURIComponent(lines.join('\n'));
 
       setTimeout(function () {
         if (btnSend) { btnSend.classList.remove('is-busy'); btnSend.textContent = 'Confirm request'; }
@@ -922,7 +1197,7 @@
           '<strong>Request received, ' + String(d.name).split(' ')[0].replace(/</g, '&lt;') + '.</strong><br>' +
           'Your table request for <b>' + prettyDate(d.date) + '</b> at <b>' + prettyTime(d.time) + '</b> has been prepared. ' +
           'Our host team confirms every booking personally on WhatsApp — a new tab has opened so you can send it through. ' +
-          'If it did not open, call us on <a href="tel:' + VENUE.phoneRaw + '" style="color:var(--gold)">' + VENUE.phone + '</a>.'
+          'If it did not open, call us on <a href="tel:' + loc.phoneRaw + '" style="color:var(--gold)">' + loc.phone + '</a>.'
         );
         window.open(wa, '_blank', 'noopener');
         try { form.reset(); } catch (err) {}
@@ -948,12 +1223,15 @@
         var label = btn ? btn.textContent : '';
         if (btn) { btn.classList.add('is-busy'); btn.textContent = 'Sending…'; }
 
+        // Quote back the hours and number of the branch the visitor is viewing.
+        var loc = currentLocation();
+
         setTimeout(function () {
           if (btn) { btn.classList.remove('is-busy'); btn.textContent = label; }
           showNote(form, 'ok',
             '<strong>Thank you — your message is on its way.</strong><br>' +
-            'Our team replies within a few hours during opening times (9:00 PM – 4:00 AM, Dubai). ' +
-            'For anything urgent, WhatsApp us on <a href="https://wa.me/' + VENUE.whatsapp + '" style="color:var(--gold)">' + VENUE.phone + '</a>.'
+            'Our team replies within a few hours during opening times (' + hoursLabel(loc) + ', Dubai). ' +
+            'For anything urgent, WhatsApp us on <a href="https://wa.me/' + loc.whatsapp + '" style="color:var(--gold)">' + loc.phone + '</a>.'
           );
           form.reset();
         }, 900);
@@ -1013,7 +1291,7 @@
       if (card) {
         card.innerHTML =
           '<h2 class="gold-text">Another time</h2>' +
-          '<p>Entry to The Royals is restricted to guests aged ' + VENUE.minAge + ' and over, ' +
+          '<p>Entry to The Royals is restricted to guests aged ' + BRAND.minAge + ' and over, ' +
           'in line with Dubai licensing regulations. Valid photo ID is checked at the door.</p>' +
           '<p class="small muted">You are welcome back when you meet the age requirement.</p>';
       }
@@ -1025,7 +1303,7 @@
      ================================================================== */
   safe('menuLinks', function () {
     $$('[data-menu-link]').forEach(function (a) {
-      a.setAttribute('href', VENUE.menuPdf);
+      a.setAttribute('href', BRAND.menuPdf);
       a.setAttribute('target', '_blank');
       a.setAttribute('rel', 'noopener noreferrer');
     });
