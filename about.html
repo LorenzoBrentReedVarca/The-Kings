@@ -16,8 +16,8 @@
 <meta property="og:image" content="https://the-royals-lounge.vercel.app/assets/img/reel-2-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="assets/img/favicon.svg">
+<link rel="icon" href="assets/img/favicon.png" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -64,8 +64,8 @@
 <!-- ===================== PRELOADER ===================== -->
 <div class="preloader">
   <div class="preloader__inner">
-    <svg class="preloader__crown" viewBox="0 0 24 24"><use href="#i-crown"></use></svg>
-    <div class="preloader__word">The Royals</div>
+    <img class="preloader__logo" src="assets/img/logo-royals-lg.png"
+         alt="" width="460" height="300" fetchpriority="high">
     <div class="preloader__bar"><span></span></div>
   </div>
 </div>
@@ -73,7 +73,7 @@
 <!-- ===================== AGE GATE (Dubai 21+) ===================== -->
 <div class="agegate" role="dialog" aria-modal="true" aria-labelledby="age-title">
   <div class="agegate__card">
-    <svg class="agegate__crown" viewBox="0 0 24 24"><use href="#i-crown"></use></svg>
+    <img class="agegate__logo" src="assets/img/logo-royals-lg.png" alt="" width="460" height="300">
     <h2 id="age-title" class="gold-text">Are you 21 or over?</h2>
     <p>The Royals is a licensed venue in Al Barsha. Under Dubai regulations, entry is limited to guests aged 21 and above. Valid photo ID — Emirates ID or passport — is checked at the door.</p>
     <div class="agegate__actions">
@@ -97,12 +97,9 @@
 <!-- ===================== HEADER ===================== -->
 <header class="header">
   <div class="shell header__inner">
-    <a class="brand" href="index.html" aria-label="The Royals — home">
-      <svg class="brand__mark" viewBox="0 0 24 24"><use href="#i-crown"></use></svg>
-      <span class="brand__type">
-        <span class="brand__name">THE ROYALS</span>
-        <span class="brand__sub">Eminent Lounge</span>
-      </span>
+    <a class="brand" href="index.html" aria-label="The Royals, an eminent Indian lounge — home">
+      <img class="brand__logo" src="assets/img/logo-royals.png"
+           alt="The Royals" width="330" height="198" fetchpriority="high" decoding="async">
     </a>
 
     <nav class="nav" aria-label="Primary">
@@ -370,12 +367,9 @@
   <div class="shell">
     <div class="footer__grid">
       <div class="footer__col">
-        <a class="brand" href="index.html">
-          <svg class="brand__mark" viewBox="0 0 24 24"><use href="#i-crown"></use></svg>
-          <span class="brand__type">
-            <span class="brand__name">THE ROYALS</span>
-            <span class="brand__sub">Eminent Lounge</span>
-          </span>
+        <a class="brand brand--lg" href="index.html">
+          <img class="brand__logo" src="assets/img/logo-royals.png"
+               alt="The Royals" width="330" height="198" loading="lazy" decoding="async">
         </a>
         <p>An eminent Indian lounge. Live music, unmatched dance performances and VIP table service, nightly in Al Barsha.</p>
         <div class="socials">

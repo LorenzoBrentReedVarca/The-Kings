@@ -2478,3 +2478,59 @@ main { position: relative; z-index: 2; }
 
 /* The header only has room for the label */
 .header .locpick__meta, .footer .locpick__meta { display: none; }
+
+/* --------------------------------------------------------------------------
+   42. Brand logo — the venue's own artwork
+   The mark already carries the name and the tagline, so it replaces the crown
+   and the two text lines entirely. Sized by height, because the header height
+   is the real constraint and the mark is a fixed 5:3.
+   -------------------------------------------------------------------------- */
+.brand { gap: 0; }
+
+.brand__logo {
+  height: 64px;
+  width: auto;
+  display: block;
+  transition: height .4s var(--ease), opacity .4s var(--ease), filter .5s var(--ease);
+}
+.brand:hover .brand__logo {
+  filter: brightness(1.12) drop-shadow(0 0 14px rgba(212, 175, 55, .3));
+}
+
+/* the bar condenses on scroll, so the mark comes with it */
+.header.is-stuck .brand__logo { height: 48px; }
+
+/* the footer has room to let it breathe */
+.brand--lg .brand__logo { height: 76px; }
+
+@media (max-width: 980px) {
+  .brand__logo { height: 48px; }
+  .header.is-stuck .brand__logo { height: 40px; }
+  .brand--lg .brand__logo { height: 62px; }
+}
+
+@media (max-width: 480px) {
+  .brand__logo { height: 40px; }
+  .header.is-stuck .brand__logo { height: 34px; }
+  .brand--lg .brand__logo { height: 54px; }
+}
+
+/* --------------------------------------------------------------------------
+   43. The mark in the preloader and the age gate
+   -------------------------------------------------------------------------- */
+.preloader__logo {
+  width: min(280px, 62vw);
+  height: auto;
+  animation: markPulse 2.1s var(--ease-in-out) infinite;
+}
+@keyframes markPulse {
+  0%, 100% { opacity: .42; transform: translateY(3px) scale(.98); }
+  50%      { opacity: 1;   transform: translateY(-3px) scale(1); }
+}
+
+.agegate__logo {
+  width: min(250px, 58vw);
+  height: auto;
+  margin: 0 auto 1.6rem;
+  display: block;
+}
