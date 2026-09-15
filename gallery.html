@@ -158,10 +158,41 @@
   <section class="page-hero">
     <div class="page-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?auto=format&fit=crop&w=1800&q=80')"></div>
     <div class="shell">
-      <span class="eyebrow is-centered">The gallery</span>
-      <h1>Nights at <span class="script gold-text">The Royals</span></h1>
-      <p class="lead">The stage, the room, the bar and the crowd. Tap any frame to open it full size.</p>
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Gallery</nav>
+      <!-- One page, three openings. The header submenu links to ?view=venue and
+           ?view=performance, and the matching block is revealed below. Without
+           JavaScript the default stays visible and the grid still works. -->
+      <!-- One heading element for the page, its text swapped per view, so the
+           document never carries more than a single h1. -->
+      <span class="eyebrow is-centered" data-view-eyebrow>The gallery</span>
+      <h1 data-view-heading>Nights at <span class="script gold-text">The Royals</span></h1>
+
+      <div data-view-copy="default">
+        <p class="lead">The stage, the room, the bar and the crowd. Tap any frame to open it full size.</p>
+      </div>
+
+      <div data-view-copy="performance"
+           data-view-eyebrow-text="Live dance performances"
+           data-view-heading-html="Where movement <span class=&quot;script gold-text&quot;>becomes art</span>"
+           data-view-bg="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1800&q=80" hidden>
+        <p class="lead">Experience captivating live dance performances that bring energy, elegance
+          and artistry to the heart of The Royals.</p>
+        <p class="view-copy__more">Our performances are thoughtfully curated to complement the lounge's
+          sophisticated atmosphere, blending mesmerizing choreography, striking visual presence and
+          dynamic entertainment into an unforgettable evening.</p>
+        <p class="view-copy__more">From the first movement to the final beat, every performance is
+          designed to captivate, elevate the atmosphere, and make your night at The Royals truly
+          extraordinary.</p>
+      </div>
+
+      <div data-view-copy="venue"
+           data-view-eyebrow-text="The venue"
+           data-view-heading-html="The room at <span class=&quot;script gold-text&quot;>The Royals</span>"
+           data-view-bg="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=1800&q=80" hidden>
+        <p class="lead">The lounge, the bar and the setting, on the ground floor of the Grand Excelsior
+          Hotel in Al Barsha.</p>
+      </div>
+
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span data-view-crumb>Gallery</span></nav>
     </div>
   </section>
 

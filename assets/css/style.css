@@ -2596,3 +2596,45 @@ main { position: relative; z-index: 2; }
   opacity: .6;
 }
 .drawer__sub:hover { color: var(--gold); gap: .9rem; }
+
+/* --------------------------------------------------------------------------
+   46. View-specific opening copy on the gallery
+   The first paragraph keeps the .lead treatment; the ones after it step down
+   so a three-paragraph opening still reads as one block rather than a wall.
+   -------------------------------------------------------------------------- */
+.view-copy__more {
+  max-width: 62ch;
+  margin: .9rem auto 0;
+  font-size: clamp(.9rem, 1.1vw, .98rem);
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+/* --------------------------------------------------------------------------
+   47. Large eyebrow, and the follow-on paragraphs under a section heading
+   -------------------------------------------------------------------------- */
+.eyebrow--lg {
+  font-size: clamp(.88rem, 1.6vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: .34em;
+  margin-bottom: 1.5rem;
+  color: var(--gold);
+}
+.eyebrow--lg::before,
+.eyebrow--lg::after { width: clamp(28px, 6vw, 74px); }
+
+/* second and third paragraphs of an intro: present, but stepped down from the lead */
+.section-head__more,
+.view-copy__more {
+  max-width: 62ch;
+  margin: .9rem auto 0;
+  font-size: clamp(.9rem, 1.1vw, .98rem);
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+.section-head__more em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.12em;
+  color: var(--gold-pale);
+}

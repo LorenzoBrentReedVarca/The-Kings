@@ -806,14 +806,66 @@
       on(btn, 'click', function () { applyFilter(btn); });
     });
 
-    // ?view=venue / ?view=performance, as linked from the Gallery submenu
+    /* The submenu links to ?view=venue and ?view=performance. As well as
+       filtering the grid, each view swaps the page's opening copy, backdrop,
+       breadcrumb and title, so it reads as its own page rather than a
+       filtered gallery. */
+    var VIEW_TITLES = {
+      performance: { title: 'Live Dance Performances | The Royals, Al Barsha', crumb: 'Performances' },
+      venue:       { title: 'The Venue | The Royals, Al Barsha',               crumb: 'Venue' }
+    };
+
+    // the page keeps one h1; only its text changes between views
+    var headingEl = $('[data-view-heading]');
+    var eyebrowEl = $('[data-view-eyebrow]');
+    var headingDefault = headingEl ? headingEl.innerHTML : '';
+    var eyebrowDefault = eyebrowEl ? eyebrowEl.textContent : '';
+
+    function applyViewCopy(view) {
+      var blocks = $$('[data-view-copy]');
+      if (!blocks.length) return;
+      var key = VIEW_TITLES[view] ? view : 'default';
+
+      blocks.forEach(function (b) { b.hidden = b.getAttribute('data-view-copy') !== key; });
+
+      var active = $('[data-view-copy="' + key + '"]');
+      var bg = active && active.getAttribute('data-view-bg');
+      var hero = $('.page-hero__bg');
+      if (hero && bg) hero.style.backgroundImage = 'url("' + bg + '")';
+
+      if (headingEl) {
+        var h = active && active.getAttribute('data-view-heading-html');
+        headingEl.innerHTML = h || headingDefault;
+      }
+      if (eyebrowEl) {
+        var e = active && active.getAttribute('data-view-eyebrow-text');
+        eyebrowEl.textContent = e || eyebrowDefault;
+      }
+
+      var meta = VIEW_TITLES[view];
+      if (meta) {
+        document.title = meta.title;
+        var crumb = $('[data-view-crumb]');
+        if (crumb) crumb.textContent = meta.crumb;
+      }
+    }
+
     try {
       var view = (new URLSearchParams(location.search).get('view') || '').toLowerCase();
       if (view && GROUPS[view]) {
         var target = $('[data-filter-group="' + view + '"]');
         if (target) applyFilter(target);
+        applyViewCopy(view);
       }
     } catch (err) {}
+
+    /* Clicking a filter by hand means the guest has left the curated view,
+       so put the general gallery wording back. */
+    filterButtons().forEach(function (btn) {
+      on(btn, 'click', function () {
+        applyViewCopy(btn.getAttribute('data-filter-group') || 'default');
+      });
+    });
 
     // --- lightbox
     var box = $('.lightbox');
