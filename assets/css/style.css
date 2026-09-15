@@ -486,7 +486,7 @@ p { text-wrap: pretty; }
   top: 0; left: 0; right: 0;
   z-index: 1000;
   transition: background .5s var(--ease), backdrop-filter .5s var(--ease),
-              border-color .5s var(--ease), transform .55s var(--ease), padding .4s var(--ease);
+              border-color .5s var(--ease), padding .4s var(--ease);
   border-bottom: 1px solid transparent;
 }
 .header__inner {
@@ -503,7 +503,6 @@ p { text-wrap: pretty; }
   border-bottom-color: var(--line);
 }
 .header.is-stuck .header__inner { height: 68px; }
-.header.is-hidden { transform: translateY(-105%); }
 
 /* Brand */
 .brand { display: inline-flex; align-items: center; gap: .8rem; flex: none; }

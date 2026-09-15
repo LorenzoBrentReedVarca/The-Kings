@@ -273,22 +273,16 @@
     var head = $('.header');
     var prog = $('.scroll-progress');
     var top  = $('.fab--top');
-    var last = 0;
 
     function onScroll() {
       var y = window.scrollY || document.documentElement.scrollTop;
       var h = document.documentElement.scrollHeight - window.innerHeight;
 
       if (prog) prog.style.width = (h > 0 ? clamp(y / h, 0, 1) * 100 : 0) + '%';
-      if (head) {
-        head.classList.toggle('is-stuck', y > 40);
-        // auto-hide going down, reveal going up (not while the drawer is open)
-        if (!document.body.classList.contains('is-locked')) {
-          head.classList.toggle('is-hidden', y > last && y > 420);
-        }
-      }
+      // The bar stays put the whole way down the page and simply condenses
+      // once you leave the top, so Reserve a table is always one click away.
+      if (head) head.classList.toggle('is-stuck', y > 40);
       if (top) top.classList.toggle('is-shown', y > 700);
-      last = y;
     }
 
     on(window, 'scroll', onScroll, { passive: true });
