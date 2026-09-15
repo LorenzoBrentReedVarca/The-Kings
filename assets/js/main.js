@@ -11,7 +11,7 @@
   var BRAND = {
     name: 'The Royals',
     tz: 'Asia/Dubai',   // GST, UTC+4, no daylight saving anywhere in the UAE
-    menuPdf: 'https://kingselitelounge.com/wp-content/uploads/2025/03/KINGS-MENU.pdf'
+    menuPage: 'menu.html'
   };
 
   /* ------------------------------------------------------------------
@@ -1379,10 +1379,12 @@
      21. MENU PDF — open in a new tab, everywhere
      ================================================================== */
   safe('menuLinks', function () {
+    // The menu is a page on this site now, so the markup already carries the
+    // right href. Just make sure nothing is left pointing at the old PDF.
     $$('[data-menu-link]').forEach(function (a) {
-      a.setAttribute('href', BRAND.menuPdf);
-      a.setAttribute('target', '_blank');
-      a.setAttribute('rel', 'noopener noreferrer');
+      a.setAttribute('href', BRAND.menuPage);
+      a.removeAttribute('target');
+      a.removeAttribute('rel');
     });
   });
 
@@ -1423,6 +1425,73 @@
       });
       on(el, 'mouseleave', function () { el.style.transform = ''; });
     });
+  });
+
+  /* ==================================================================
+     24b. MENU — bar / food tabs
+     ================================================================== */
+  safe('menuTabs', function () {
+    var btns = $$('[data-menu-tab]');
+    if (!btns.length) return;
+
+    btns.forEach(function (btn) {
+      on(btn, 'click', function () {
+        var key = btn.getAttribute('data-menu-tab');
+        btns.forEach(function (b) {
+          var active = b === btn;
+          b.classList.toggle('is-active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        $$('[data-menu-panel]').forEach(function (p) {
+          p.hidden = p.getAttribute('data-menu-panel') !== key;
+        });
+      });
+    });
+  });
+
+  /* ==================================================================
+     24c. MENU LANGUAGE — English / Arabic
+
+     Every translatable element carries both data-en and data-ar, with the
+     English written into the markup, so the menu is readable before any
+     script runs. The direction flips on <main> rather than <html>: the
+     header, drawer and footer are not translated, and mirroring them
+     would just look broken.
+     ================================================================== */
+  safe('menuLang', function () {
+    var btns = $$('[data-lang]');
+    if (!btns.length) return;
+
+    var KEY = 'tr-menu-lang';
+    var scope = $('main') || document.body;
+
+    function apply(lang) {
+      var ar = lang === 'ar';
+
+      scope.setAttribute('lang', ar ? 'ar' : 'en');
+      scope.setAttribute('dir', ar ? 'rtl' : 'ltr');
+
+      $$('[data-en]', scope).forEach(function (el) {
+        var v = el.getAttribute(ar ? 'data-ar' : 'data-en');
+        if (v !== null) el.textContent = v;
+      });
+
+      btns.forEach(function (b) {
+        var active = b.getAttribute('data-lang') === lang;
+        b.classList.toggle('is-active', active);
+        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+
+      try { localStorage.setItem(KEY, lang); } catch (e) {}
+    }
+
+    btns.forEach(function (b) {
+      on(b, 'click', function () { apply(b.getAttribute('data-lang')); });
+    });
+
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    if (saved === 'ar') apply('ar');
   });
 
   /* ==================================================================

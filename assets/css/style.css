@@ -2638,3 +2638,163 @@ main { position: relative; z-index: 2; }
   font-size: 1.12em;
   color: var(--gold-pale);
 }
+
+/* --------------------------------------------------------------------------
+   48. Menu page
+   -------------------------------------------------------------------------- */
+.page-hero--menu { padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+
+/* language switch */
+.langpick {
+  display: inline-flex;
+  gap: .4rem;
+  margin-top: 1.75rem;
+  padding: .35rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  background: rgba(10, 10, 12, .6);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.langpick__btn {
+  padding: .5rem 1.25rem;
+  border-radius: 100px;
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  transition: all .35s var(--ease);
+}
+.langpick__btn:hover { color: var(--gold); }
+.langpick__btn.is-active {
+  background: var(--gold-grad);
+  color: #0a0800;
+  font-weight: 600;
+}
+.langpick__btn[lang="ar"] {
+  font-family: "Noto Kufi Arabic", var(--font-body);
+  letter-spacing: 0;
+  font-size: .82rem;
+}
+
+/* the menu itself, two columns of sections on a wide screen */
+.menu {
+  columns: 2;
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  margin-top: clamp(1.5rem, 3vw, 2.5rem);
+}
+.menu > div { display: contents; }
+
+.menu__group {
+  break-inside: avoid;
+  margin-bottom: clamp(1.9rem, 3.4vw, 2.8rem);
+}
+
+.menu__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-weight: 600;
+  color: var(--gold);
+  margin-bottom: .9rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.menu__list { display: grid; gap: .1rem; }
+
+.menu__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: .6rem;
+  padding: .5rem 0;
+  font-size: .94rem;
+}
+.menu__row--measures,
+.menu__head {
+  grid-template-columns: 1fr repeat(3, 3.6rem);
+  gap: .5rem;
+}
+
+.menu__head {
+  display: grid;
+  padding-bottom: .3rem;
+  font-size: .6rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.menu__name { display: grid; gap: .16rem; min-width: 0; }
+.menu__name > span:first-child { color: var(--text); }
+.menu__sub {
+  font-size: .74rem;
+  color: var(--text-mute);
+  letter-spacing: .02em;
+}
+
+/* the leader dots between a dish and its price */
+.menu__dots {
+  align-self: center;
+  height: 1px;
+  min-width: 1.5rem;
+  background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+  background-size: 6px 1px;
+  background-repeat: repeat-x;
+  opacity: .75;
+}
+
+.menu__p {
+  font-family: var(--font-display);
+  font-size: .96rem;
+  color: var(--gold-pale);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+.menu__row--measures .menu__p { font-size: .9rem; }
+
+.menu__note {
+  max-width: 62ch;
+  margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+  text-align: center;
+  font-size: .78rem;
+  line-height: 1.7;
+  color: var(--text-mute);
+}
+
+@media (max-width: 860px) {
+  .menu { columns: 1; }
+}
+@media (max-width: 420px) {
+  .menu__row--measures,
+  .menu__head { grid-template-columns: 1fr repeat(3, 2.9rem); gap: .35rem; }
+  .menu__p { font-size: .85rem; }
+}
+
+/* --------------------------------------------------------------------------
+   49. Arabic — right to left, and a typeface that suits the script
+   -------------------------------------------------------------------------- */
+[lang="ar"] .menu__title,
+[lang="ar"] .menu__name,
+[lang="ar"] .menu__sub,
+[lang="ar"] .menu__note,
+[lang="ar"] .tab,
+[lang="ar"] .eyebrow,
+[lang="ar"] .lead,
+[lang="ar"] .crumbs {
+  font-family: "Noto Kufi Arabic", var(--font-body);
+  letter-spacing: 0;
+}
+[lang="ar"] .menu__title { font-style: normal; }
+[lang="ar"] h1 { font-family: "Noto Kufi Arabic", var(--font-display); letter-spacing: 0; }
+
+/* mirror the row so prices sit on the left and names read from the right */
+[dir="rtl"] .menu__row { grid-template-columns: auto 1fr auto; }
+[dir="rtl"] .menu__p { text-align: left; }
+[dir="rtl"] .menu__note,
+[dir="rtl"] .page-hero .lead { text-align: center; }
+[dir="rtl"] .menu__title { text-align: right; }
+[dir="rtl"] .eyebrow::before { background: linear-gradient(270deg, transparent, var(--gold)); }
+[dir="rtl"] .eyebrow.is-centered::after { background: linear-gradient(90deg, transparent, var(--gold)); }

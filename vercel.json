@@ -58,11 +58,6 @@
   ],
   "redirects": [
     {
-      "source": "/menu",
-      "destination": "https://kingselitelounge.com/wp-content/uploads/2025/03/KINGS-MENU.pdf",
-      "permanent": false
-    },
-    {
       "source": "/book",
       "destination": "/reservations",
       "permanent": false
