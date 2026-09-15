@@ -486,10 +486,49 @@ p { text-wrap: pretty; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  transition: background .5s var(--ease), backdrop-filter .5s var(--ease),
-              border-color .5s var(--ease), padding .4s var(--ease);
-  border-bottom: 1px solid transparent;
+  transition: padding .4s var(--ease);
+  /* No border and no shadow: the bar has to melt into the page, not sit on it. */
 }
+
+/* The scrim. Two layers, both taller than the bar so the fade has somewhere to
+   finish, and both anchored to the top so the nav sits on the densest part.
+   ::before is the tint, ::after the blur — the blur needs its own layer because
+   backdrop-filter cannot fade on its own and would otherwise cut off in a hard
+   line exactly where the tint has gone transparent. */
+.header::before,
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 0;
+  bottom: -38px;          /* the fade runs on past the bar itself */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.header::before {
+  background: linear-gradient(180deg,
+    rgba(4, 4, 5, .80) 0%,
+    rgba(4, 4, 5, .66) 30%,
+    rgba(4, 4, 5, .40) 58%,
+    rgba(4, 4, 5, .14) 80%,
+    rgba(4, 4, 5, 0)  100%);
+  opacity: .82;
+  transition: opacity .5s var(--ease);
+}
+
+.header::after {
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  backdrop-filter: blur(16px) saturate(150%);
+  /* feather the blur out on the same curve as the tint */
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 34%, rgba(0,0,0,.45) 68%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 34%, rgba(0,0,0,.45) 68%, transparent 100%);
+  opacity: 0;
+  transition: opacity .5s var(--ease);
+}
+
+/* keep the logo and nav above both scrim layers */
+.header__inner { position: relative; z-index: 1; }
 .header__inner {
   display: flex;
   align-items: center;
@@ -498,22 +537,21 @@ p { text-wrap: pretty; }
   height: var(--nav-h);
   transition: height .4s var(--ease);
 }
-.header.is-stuck {
-  /* Semi-transparent glass. The page shows through and blurs behind the bar,
-     with the scrim heavier at the top where the nav text sits and lighter at
-     the bottom edge so the join with the page stays soft. */
-  background: linear-gradient(180deg, rgba(4, 4, 5, .70) 0%, rgba(4, 4, 5, .36) 100%);
-  -webkit-backdrop-filter: blur(24px) saturate(165%);
-  backdrop-filter: blur(24px) saturate(165%);
-  border-bottom-color: var(--line);
-  box-shadow: 0 14px 44px -28px rgba(0, 0, 0, .95);
-}
+/* Once scrolled, the tint firms up and the feathered blur fades in. The shape
+   of the gradient never changes, so the bar deepens rather than gaining an edge. */
+.header.is-stuck::before { opacity: 1; }
+.header.is-stuck::after  { opacity: 1; }
 
-/* With no backdrop blur there is nothing separating the bar from the page
-   behind it, so fall back to a near-solid panel rather than unreadable glass. */
+/* Where the blur is unavailable the tint is carrying the whole job, so lean on
+   it harder — still a fade to nothing, just a denser start. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .header.is-stuck {
-    background: linear-gradient(180deg, rgba(4, 4, 5, .96), rgba(4, 4, 5, .9));
+  .header::before {
+    background: linear-gradient(180deg,
+      rgba(4, 4, 5, .94) 0%,
+      rgba(4, 4, 5, .82) 30%,
+      rgba(4, 4, 5, .52) 58%,
+      rgba(4, 4, 5, .20) 80%,
+      rgba(4, 4, 5, 0)  100%);
   }
 }
 .header.is-stuck .header__inner { height: 68px; }
