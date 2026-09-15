@@ -1,0 +1,20 @@
+# Vercel
+.vercel/
+
+# Editor / tooling scratch
+.kombai/
+.vscode/
+.idea/
+
+# OS noise
+Thumbs.db
+ehthumbs.db
+desktop.ini
+.DS_Store
+._*
+
+# Logs & dependencies (none used today, guard anyway)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+*.log
