@@ -103,20 +103,6 @@
   </div>
 </div>
 
-<!-- ===================== AGE GATE (Dubai 21+) ===================== -->
-<div class="agegate" role="dialog" aria-modal="true" aria-labelledby="age-title">
-  <div class="agegate__card">
-    <img class="agegate__logo" src="assets/img/logo-royals-lg.png" alt="" width="460" height="300">
-    <h2 id="age-title" class="gold-text">Are you 21 or over?</h2>
-    <p>The Royals is a licensed venue in Al Barsha. Under Dubai regulations, entry is limited to guests aged 21 and above. Valid photo ID — Emirates ID or passport — is checked at the door.</p>
-    <div class="agegate__actions">
-      <button class="btn btn--gold" type="button" data-age-yes>Yes, I am 21+</button>
-      <button class="btn btn--ghost" type="button" data-age-no>I am under 21</button>
-    </div>
-    <p class="agegate__deny">By entering you agree to our house rules and venue policy.</p>
-  </div>
-</div>
-
 <!-- ===================== AMBIENT LAYERS ===================== -->
 <div class="bg-fx" aria-hidden="true">
   <span class="glow glow--a"></span>
@@ -138,8 +124,16 @@
     <nav class="nav" aria-label="Primary">
       <a class="nav__link" href="index.html">Home</a>
       <a class="nav__link" href="about.html">About</a>
-      <a class="nav__link" href="events.html">Nights</a>
-      <a class="nav__link" href="gallery.html">Gallery</a>
+      <div class="nav__group">
+        <a class="nav__link nav__link--sub" href="gallery.html" aria-haspopup="true" aria-expanded="false">
+          Gallery
+          <svg class="nav__caret" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-right"></use></svg>
+        </a>
+        <div class="nav__menu" role="menu">
+          <a role="menuitem" href="gallery.html?view=venue">Venue</a>
+          <a role="menuitem" href="gallery.html?view=performance">Performance</a>
+        </div>
+      </div>
       <a class="nav__link" href="#" data-menu-link>Menu</a>
       <a class="nav__link" href="contact.html">Contact</a>
     </nav>
@@ -167,11 +161,14 @@
   <nav class="drawer__body" aria-label="Mobile">
     <a class="drawer__link" href="index.html"><span>01</span>Home</a>
     <a class="drawer__link" href="about.html"><span>02</span>About</a>
-    <a class="drawer__link" href="events.html"><span>03</span>Nights</a>
-    <a class="drawer__link" href="gallery.html"><span>04</span>Gallery</a>
-    <a class="drawer__link" href="#" data-menu-link><span>05</span>Menu</a>
-    <a class="drawer__link" href="reservations.html"><span>06</span>Reserve</a>
-    <a class="drawer__link" href="contact.html"><span>07</span>Contact</a>
+    <a class="drawer__link" href="gallery.html"><span>03</span>Gallery</a>
+    <div class="drawer__subs">
+      <a class="drawer__sub" href="gallery.html?view=venue">Venue</a>
+      <a class="drawer__sub" href="gallery.html?view=performance">Performance</a>
+    </div>
+    <a class="drawer__link" href="#" data-menu-link><span>04</span>Menu</a>
+    <a class="drawer__link" href="reservations.html"><span>05</span>Reserve</a>
+    <a class="drawer__link" href="contact.html"><span>06</span>Contact</a>
   </nav>
   <div class="drawer__foot">
     <div class="locpick" data-location-picker hidden></div>
@@ -194,9 +191,9 @@
   <section class="page-hero">
     <div class="page-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1546412414-e1885259563a?auto=format&fit=crop&w=1800&q=80')"></div>
     <div class="shell">
-      <span class="eyebrow is-centered">Al Barsha, Dubai</span>
-      <h1>Get in <span class="script gold-text">touch</span></h1>
-      <p class="lead">Ground floor of the Grand Excelsior Hotel. Call, message or just turn up — doors open at 9:00 PM, every night.</p>
+      <span class="eyebrow is-centered">Contact us</span>
+      <h1>Reservations &amp; <span class="script gold-text">enquiries</span></h1>
+      <p class="lead">For table reservations, VIP bookings, celebrations and general enquiries, our team is pleased to assist you.</p>
       <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Contact</nav>
     </div>
   </section>
@@ -224,9 +221,8 @@
         </div>
         <div class="contact-card" data-reveal data-delay=".18">
           <span class="contact-card__icon"><svg viewBox="0 0 24 24"><use href="#i-instagram"></use></svg></span>
-          <h4>Follow</h4>
-          <p><a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener">@theroyalseminentlounge</a><br>
-             <a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener">instagram.com/theroyalseminentlounge</a></p>
+          <h4>Follow us</h4>
+          <p><a href="https://www.instagram.com/theroyalsdubai" target="_blank" rel="noopener">@theroyalsdubai</a></p>
         </div>
       </div>
     </div>
@@ -369,11 +365,6 @@
         </details>
 
         <details class="faq__item">
-          <summary>Is there an age restriction?</summary>
-          <div class="faq__body"><p>Yes. Entry is limited to guests aged 21 and over, in line with Dubai licensing regulations. Valid photo identification — an Emirates ID or passport — is checked at the door every night, for every guest.</p></div>
-        </details>
-
-        <details class="faq__item">
           <summary>What is the dress code?</summary>
           <div class="faq__body"><p>Smart elegant. No shorts, sportswear, flip-flops or work wear. Management reserves the right of admission, so if you are unsure about an outfit, message us on WhatsApp before you travel.</p></div>
         </details>
@@ -412,7 +403,7 @@
     <div class="shell">
       <div data-reveal>
         <span class="eyebrow is-centered">Your table awaits</span>
-        <h2>The night starts at <span class="script gold-text">9:00</span></h2>
+        <h2>Dress luxurious. Feel royal. <span class="script gold-text">Own the night.</span></h2>
         <p class="lead">
           Tables are limited and Thursday through Saturday sells out. Send a request and our host team
           confirms personally on WhatsApp.
@@ -438,8 +429,8 @@
         </a>
         <p>An eminent Indian lounge. Live music, unmatched dance performances and VIP table service, nightly in Al Barsha.</p>
         <div class="socials">
-          <a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#i-instagram"></use></svg></a>
-          <a href="https://www.instagram.com/theroyalseminentlounge" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><use href="#i-facebook"></use></svg></a>
+          <a href="https://www.instagram.com/theroyalsdubai" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><use href="#i-instagram"></use></svg></a>
+          <a href="https://www.instagram.com/theroyalsdubai" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><use href="#i-facebook"></use></svg></a>
           <a href="https://wa.me/971542921626" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><use href="#i-whatsapp"></use></svg></a>
           <a href="tel:+971542921626" aria-label="Call us"><svg viewBox="0 0 24 24"><use href="#i-phone"></use></svg></a>
         </div>
@@ -497,7 +488,7 @@
         <a href="#" data-menu-link>Menu</a>
         <a href="about#house-rules">House rules</a>
         <a href="contact.html">Contact</a>
-        <span>21+ · Photo ID required</span>
+        <span>Dress luxurious. Own the night.</span>
       </div>
     </div>
   </div>

@@ -259,6 +259,11 @@ p { text-wrap: pretty; }
   inset: 0;
   pointer-events: none;
   z-index: 0;
+  /* The glows are deliberately larger than the screen and sit partly off it.
+     Clipping them here keeps the document's scroll width honest — body already
+     hides the overflow, but without this the page still measures wider than the
+     viewport, which is a trap for anything that reads scrollWidth. */
+  overflow: hidden;
 }
 
 .bg-fx::before {
@@ -1891,43 +1896,6 @@ p { text-wrap: pretty; }
 .fab:hover .fab__tip { opacity: 1; transform: translateY(-50%); }
 
 /* --------------------------------------------------------------------------
-   26. Age gate
-   -------------------------------------------------------------------------- */
-.agegate {
-  position: fixed;
-  inset: 0;
-  z-index: 9990;
-  display: grid;
-  place-items: center;
-  padding: 1.25rem;
-  background: rgba(3,3,4,.97);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity .5s var(--ease), visibility .5s;
-}
-.agegate.is-open { opacity: 1; visibility: visible; }
-.agegate__card {
-  width: min(520px, 100%);
-  padding: clamp(2rem, 5vw, 3.2rem);
-  text-align: center;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  background: linear-gradient(170deg, #14120b, var(--ink));
-  box-shadow: var(--shadow-gold);
-  transform: translateY(18px) scale(.97);
-  transition: transform .55s var(--ease-out);
-}
-.agegate.is-open .agegate__card { transform: none; }
-.agegate__crown { width: 52px; color: var(--gold); margin: 0 auto 1.4rem; }
-.agegate h2 { font-size: clamp(1.5rem, 3.4vw, 2rem); margin-bottom: .9rem; }
-.agegate p { color: var(--text-soft); font-size: .92rem; margin-bottom: 1.9rem; }
-.agegate__actions { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; }
-.agegate__deny { font-size: .8rem; color: var(--text-mute); margin-top: 1.5rem; }
-.agegate__deny button { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; font-size: inherit; }
-
-/* --------------------------------------------------------------------------
    27. Countdown
    -------------------------------------------------------------------------- */
 .countdown {
@@ -2101,7 +2069,7 @@ main { position: relative; z-index: 2; }
 /* Print */
 @media print {
   .header, .drawer, .float-stack, .preloader, .cursor, .cursor-dot,
-  .bg-fx, #dust, .scroll-progress, .agegate, .hero__beams { display: none !important; }
+  .bg-fx, #dust, .scroll-progress, .hero__beams { display: none !important; }
   body { background: #fff; color: #000; }
   .panel, .tile, .package { border-color: #ccc; }
 }
@@ -2528,9 +2496,103 @@ main { position: relative; z-index: 2; }
   50%      { opacity: 1;   transform: translateY(-3px) scale(1); }
 }
 
-.agegate__logo {
-  width: min(250px, 58vw);
-  height: auto;
-  margin: 0 auto 1.6rem;
-  display: block;
+
+/* --------------------------------------------------------------------------
+   44. Gallery submenu in the header
+   -------------------------------------------------------------------------- */
+.nav__group { position: relative; }
+
+.nav__link--sub { display: inline-flex; align-items: center; gap: .4rem; }
+.nav__caret {
+  width: 10px; height: 10px;
+  transform: rotate(90deg);
+  transition: transform .35s var(--ease-out);
 }
+.nav__group:hover .nav__caret,
+.nav__group:focus-within .nav__caret { transform: rotate(-90deg); }
+
+.nav__menu {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 186px;
+  display: grid;
+  gap: .1rem;
+  padding: .45rem;
+  background: rgba(10, 10, 12, .96);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .3s var(--ease), transform .35s var(--ease-out), visibility .3s;
+  z-index: 20;
+}
+/* a bridge across the gap, so moving the pointer down does not close it */
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -18px;
+  height: 18px;
+}
+
+.nav__group:hover .nav__menu,
+.nav__group:focus-within .nav__menu,
+.nav__group.is-open .nav__menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav__menu a {
+  padding: .62rem .9rem;
+  font-size: .68rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+  border-radius: 2px;
+  transition: background .3s var(--ease), color .3s var(--ease), padding-left .3s var(--ease-out);
+}
+.nav__menu a:hover,
+.nav__menu a:focus-visible {
+  background: rgba(212, 175, 55, .12);
+  color: var(--gold);
+  padding-left: 1.15rem;
+}
+
+/* --------------------------------------------------------------------------
+   45. The same two entries inside the mobile drawer
+   -------------------------------------------------------------------------- */
+.drawer__subs {
+  display: grid;
+  gap: .05rem;
+  padding: .1rem 0 .7rem 1.6rem;
+  opacity: 0;
+  transform: translateY(24px);
+}
+.drawer.is-open .drawer__subs { animation: drawerIn .6s var(--ease-out) .34s forwards; }
+
+.drawer__sub {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .34rem 0;
+  font-family: var(--font-body);
+  font-size: .76rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  transition: color .3s var(--ease), gap .3s var(--ease-out);
+}
+.drawer__sub::before {
+  content: "";
+  width: 14px; height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+.drawer__sub:hover { color: var(--gold); gap: .9rem; }

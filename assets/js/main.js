@@ -11,7 +11,6 @@
   var BRAND = {
     name: 'The Royals',
     tz: 'Asia/Dubai',   // GST, UTC+4, no daylight saving anywhere in the UAE
-    minAge: 21,         // Dubai licensed-venue entry age
     menuPdf: 'https://kingselitelounge.com/wp-content/uploads/2025/03/KINGS-MENU.pdf'
   };
 
@@ -321,6 +320,51 @@
   /* ==================================================================
      6. ACTIVE NAV LINK
      ================================================================== */
+  /* ==================================================================
+     5b. HEADER SUBMENU
+     Hover opens it on a pointer device. On touch there is no hover, so the
+     first tap opens the submenu and a second tap follows the link through.
+     ================================================================== */
+  safe('navMenu', function () {
+    var groups = $$('.nav__group');
+    if (!groups.length) return;
+
+    function closeAll(except) {
+      groups.forEach(function (g) {
+        if (g === except) return;
+        g.classList.remove('is-open');
+        var t = $('.nav__link--sub', g);
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    groups.forEach(function (group) {
+      var trigger = $('.nav__link--sub', group);
+      if (!trigger) return;
+
+      on(trigger, 'click', function (e) {
+        if (!isTouch) return;                      // pointer devices use hover
+        if (group.classList.contains('is-open')) return;   // second tap follows the link
+        e.preventDefault();
+        closeAll(group);
+        group.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      });
+
+      on(group, 'focusin', function () { trigger.setAttribute('aria-expanded', 'true'); });
+      on(group, 'focusout', function (e) {
+        if (!group.contains(e.relatedTarget)) trigger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    on(document, 'click', function (e) {
+      if (!e.target.closest('.nav__group')) closeAll(null);
+    });
+    on(document, 'keydown', function (e) {
+      if (e.key === 'Escape') closeAll(null);
+    });
+  });
+
   safe('activeNav', function () {
     /* Normalise a path or href down to a bare page key, so the same code works
        whether the host serves /about.html or Vercel's clean /about. */
@@ -736,17 +780,40 @@
     var items = $$('.gallery__item', grid);
 
     // --- filters
-    $$('[data-filter]').forEach(function (btn) {
-      on(btn, 'click', function () {
-        var key = btn.getAttribute('data-filter');
-        $$('[data-filter]').forEach(function (b) { b.classList.toggle('is-active', b === btn); });
-        items.forEach(function (it) {
-          var cat = it.getAttribute('data-cat') || '';
-          var show = key === 'all' || cat === key;
-          it.classList.toggle('is-hidden', !show);
-        });
+    // Two levels: the granular categories, and the two groupings the header
+    // submenu links to. Venue is the place, Performance is what happens on it.
+    var GROUPS = {
+      venue:       ['venue', 'bar', 'crowd'],
+      performance: ['shows', 'dj', 'celebrations']
+    };
+
+    function filterButtons() { return $$('[data-filter], [data-filter-group]'); }
+
+    function applyFilter(btn) {
+      var key   = btn.getAttribute('data-filter');
+      var group = btn.getAttribute('data-filter-group');
+      var cats  = group ? GROUPS[group] : null;
+
+      filterButtons().forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+      items.forEach(function (it) {
+        var cat = it.getAttribute('data-cat') || '';
+        var show = cats ? cats.indexOf(cat) > -1 : (key === 'all' || cat === key);
+        it.classList.toggle('is-hidden', !show);
       });
+    }
+
+    filterButtons().forEach(function (btn) {
+      on(btn, 'click', function () { applyFilter(btn); });
     });
+
+    // ?view=venue / ?view=performance, as linked from the Gallery submenu
+    try {
+      var view = (new URLSearchParams(location.search).get('view') || '').toLowerCase();
+      if (view && GROUPS[view]) {
+        var target = $('[data-filter-group="' + view + '"]');
+        if (target) applyFilter(target);
+      }
+    } catch (err) {}
 
     // --- lightbox
     var box = $('.lightbox');
@@ -1253,42 +1320,6 @@
         input.placeholder = 'You are on the guest list.';
         setTimeout(function () { if (btn) btn.textContent = 'Join'; }, 3200);
       });
-    });
-  });
-
-  /* ==================================================================
-     20. AGE GATE — Dubai licensed venues are 21+
-     ================================================================== */
-  safe('ageGate', function () {
-    var gate = $('.agegate');
-    if (!gate) return;
-    var KEY = 'kel-age-ok';
-    var passed = false;
-    try { passed = sessionStorage.getItem(KEY) === '1'; } catch (e) { passed = false; }
-    if (passed) return;
-
-    setTimeout(function () {
-      gate.classList.add('is-open');
-      document.body.classList.add('is-locked');
-      var y = $('[data-age-yes]', gate); if (y) y.focus();
-    }, 650);
-
-    on($('[data-age-yes]', gate), 'click', function () {
-      try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
-      gate.classList.remove('is-open');
-      document.body.classList.remove('is-locked');
-      setTimeout(function () { gate.remove(); }, 600);
-    });
-
-    on($('[data-age-no]', gate), 'click', function () {
-      var card = $('.agegate__card', gate);
-      if (card) {
-        card.innerHTML =
-          '<h2 class="gold-text">Another time</h2>' +
-          '<p>Entry to The Royals is restricted to guests aged ' + BRAND.minAge + ' and over, ' +
-          'in line with Dubai licensing regulations. Valid photo ID is checked at the door.</p>' +
-          '<p class="small muted">You are welcome back when you meet the age requirement.</p>';
-      }
     });
   });
 
