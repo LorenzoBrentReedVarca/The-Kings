@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KING'S ELITE LOUNGE — Bur Dubai
+   THE ROYALS — An Eminent Indian Lounge, Al Barsha, Dubai
    Core stylesheet. Black & Gold design system.
    ========================================================================== */
 
@@ -2153,3 +2153,99 @@ main { position: relative; z-index: 2; }
    left the reservation form showing Back, Continue and Confirm all at once.
    -------------------------------------------------------------------------- */
 [hidden] { display: none !important; }
+
+/* --------------------------------------------------------------------------
+   36. Hero video
+   The Ken Burns drift belongs to the still image only — real footage already
+   moves, so a second motion layer just makes it seasick.
+   -------------------------------------------------------------------------- */
+.hero__media video {
+  animation: none;
+  transform: scale(1.02);
+}
+
+/* --------------------------------------------------------------------------
+   37. Reels — vertical clips from the venue's own stage
+   -------------------------------------------------------------------------- */
+.reels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(.9rem, 2vw, 1.5rem);
+}
+
+.reel {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius-lg);
+  background: var(--panel);
+  transition: border-color .45s var(--ease), transform .5s var(--ease-out), box-shadow .5s var(--ease);
+}
+.reel:hover { border-color: var(--line); transform: translateY(-5px); box-shadow: var(--shadow-soft); }
+
+.reel__video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  background: var(--ink);
+  filter: saturate(1.05) contrast(1.04) brightness(.86);
+  transition: filter .6s var(--ease), transform .9s var(--ease-out);
+}
+.reel:hover .reel__video { filter: saturate(1.1) contrast(1.05) brightness(1); transform: scale(1.03); }
+
+.reel__cap {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 2.6rem 1.15rem 1.15rem;
+  background: linear-gradient(180deg, transparent, rgba(4, 4, 5, .9) 62%);
+  pointer-events: none;
+}
+.reel__cap h3 {
+  font-size: clamp(1rem, 1.5vw, 1.18rem);
+  margin-bottom: .25rem;
+}
+.reel__cap p {
+  margin: 0;
+  font-size: .6rem;
+  letter-spacing: .26em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* A gold hairline that fills as the clip runs, so the loop reads as deliberate */
+.reel::after {
+  content: "";
+  position: absolute;
+  left: 0; top: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--gold-grad);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .5s var(--ease-out);
+}
+.reel.is-playing::after { transform: scaleX(1); transition: transform 12s linear; }
+
+@media (max-width: 900px) {
+  /* A row of tall portrait clips eats the page on a phone, so it becomes a
+     swipeable rail instead of a stack. */
+  .reels {
+    display: flex;
+    gap: .75rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* bleed to the screen edges, then pad back in */
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: .5rem;
+  }
+  .reels::-webkit-scrollbar { display: none; }
+  .reel {
+    flex: 0 0 min(72vw, 300px);
+    scroll-snap-align: center;
+  }
+}

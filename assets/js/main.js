@@ -1,5 +1,5 @@
 /* ==========================================================================
-   KING'S ELITE LOUNGE — main.js
+   THE ROYALS — main.js
    All site interactivity. Vanilla ES2018+, no dependencies.
    ========================================================================== */
 (function () {
@@ -9,12 +9,12 @@
      Venue constants — single source of truth
      ------------------------------------------------------------------ */
   var VENUE = {
-    name: "King's Elite Lounge",
+    name: "The Royals",
     tz: 'Asia/Dubai',              // GST, UTC+4, no daylight saving
-    phone: '+971 56 428 4766',
-    phoneRaw: '+971564284766',
-    whatsapp: '971564284766',
-    openHour: 21, openMinute: 30,  // 9:30 PM
+    phone: '+971 54 292 1626',
+    phoneRaw: '+971542921626',
+    whatsapp: '971542921626',
+    openHour: 21, openMinute: 0,   // 9:00 PM
     closeHour: 4,  closeMinute: 0, // 4:00 AM (next day)
     minAge: 21,                    // Dubai licensed-venue entry age
     menuPdf: 'https://kingselitelounge.com/wp-content/uploads/2025/03/KINGS-MENU.pdf'
@@ -30,7 +30,7 @@
   /* Runs a feature in isolation: one broken feature must never disable the rest. */
   function safe(name, fn) {
     try { fn(); } catch (e) {
-      if (window.console && console.warn) console.warn('[KEL] ' + name + ' failed:', e);
+      if (window.console && console.warn) console.warn('[TR] ' + name + ' failed:', e);
     }
   }
 
@@ -89,7 +89,7 @@
     return new Date(guess - off * 60000);
   }
 
-  var OPEN_MIN  = VENUE.openHour * 60 + VENUE.openMinute;   // 1290
+  var OPEN_MIN  = VENUE.openHour * 60 + VENUE.openMinute;   // 1260
   var CLOSE_MIN = VENUE.closeHour * 60 + VENUE.closeMinute; // 240
 
   function venueStatus() {
@@ -567,7 +567,7 @@
       current = (i + list.length) % list.length;
       var it = list[current];
       var src = it.getAttribute('data-full') || ($('img', it) || {}).src;
-      if (img) { img.src = src; img.alt = it.getAttribute('data-title') || 'King\'s Elite Lounge'; }
+      if (img) { img.src = src; img.alt = it.getAttribute('data-title') || 'The Royals'; }
       if (cap) cap.textContent = it.getAttribute('data-title') || '';
       if (cat) cat.textContent = it.getAttribute('data-caption') || '';
       if (idxEl) idxEl.textContent = (current + 1) + ' / ' + list.length;
@@ -902,7 +902,7 @@
       if (btnSend) { btnSend.classList.add('is-busy'); btnSend.textContent = 'Sending…'; }
 
       var lines = [
-        'TABLE RESERVATION — King\'s Elite Lounge',
+        'TABLE RESERVATION — The Royals',
         '',
         'Name: ' + d.name,
         'Phone: ' + d.phone,
@@ -952,7 +952,7 @@
           if (btn) { btn.classList.remove('is-busy'); btn.textContent = label; }
           showNote(form, 'ok',
             '<strong>Thank you — your message is on its way.</strong><br>' +
-            'Our team replies within a few hours during opening times (9:30 PM – 4:00 AM, Dubai). ' +
+            'Our team replies within a few hours during opening times (9:00 PM – 4:00 AM, Dubai). ' +
             'For anything urgent, WhatsApp us on <a href="https://wa.me/' + VENUE.whatsapp + '" style="color:var(--gold)">' + VENUE.phone + '</a>.'
           );
           form.reset();
@@ -1013,7 +1013,7 @@
       if (card) {
         card.innerHTML =
           '<h2 class="gold-text">Another time</h2>' +
-          '<p>Entry to King\'s Elite Lounge is restricted to guests aged ' + VENUE.minAge + ' and over, ' +
+          '<p>Entry to The Royals is restricted to guests aged ' + VENUE.minAge + ' and over, ' +
           'in line with Dubai licensing regulations. Valid photo ID is checked at the door.</p>' +
           '<p class="small muted">You are welcome back when you meet the age requirement.</p>';
       }
@@ -1067,6 +1067,78 @@
         el.style.transform = 'perspective(900px) rotateY(' + (px * 5).toFixed(2) + 'deg) rotateX(' + (-py * 5).toFixed(2) + 'deg) translateY(-6px)';
       });
       on(el, 'mouseleave', function () { el.style.transform = ''; });
+    });
+  });
+
+  /* ==================================================================
+     25. HERO VIDEO
+     The source is attached here rather than in the markup, so the file is
+     only ever fetched when it is actually going to be watched. Phones,
+     data-saver users and anyone asking for reduced motion keep the poster.
+     ================================================================== */
+  function attachSource(video) {
+    if (!video || video.getAttribute('data-loaded')) return false;
+    var src = video.getAttribute('data-src');
+    if (!src) return false;
+    var s = document.createElement('source');
+    s.src = src;
+    s.type = 'video/mp4';
+    video.appendChild(s);
+    video.setAttribute('data-loaded', '1');
+    video.load();
+    return true;
+  }
+
+  function tryPlay(video) {
+    var p = video.play();
+    // Browsers may refuse autoplay. That is fine — the poster frame stands in.
+    if (p && typeof p.catch === 'function') p.catch(function () {});
+  }
+
+  function dataSaver() {
+    var c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    if (!c) return false;
+    return !!c.saveData || /^(slow-)?2g$/.test(c.effectiveType || '');
+  }
+
+  safe('heroVideo', function () {
+    var video = $('[data-hero-video]');
+    if (!video) return;
+    if (reduceMotion || dataSaver() || window.innerWidth < 760) return;
+    if (attachSource(video)) tryPlay(video);
+  });
+
+  /* ==================================================================
+     26. REELS — load and play only while on screen
+     ================================================================== */
+  safe('reels', function () {
+    var reels = $$('[data-reel]');
+    if (!reels.length) return;
+
+    // Without IntersectionObserver the poster frames carry the section.
+    if (!('IntersectionObserver' in window) || dataSaver()) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        var v = en.target;
+        var card = v.closest('.reel');
+        if (en.isIntersecting) {
+          attachSource(v);
+          if (!reduceMotion) { tryPlay(v); if (card) card.classList.add('is-playing'); }
+        } else {
+          v.pause();
+          if (card) card.classList.remove('is-playing');
+        }
+      });
+    }, { threshold: 0.35 });
+
+    reels.forEach(function (v) { io.observe(v); });
+
+    // Pause everything when the tab is hidden so we never decode in the background.
+    on(document, 'visibilitychange', function () {
+      if (!document.hidden) return;
+      reels.forEach(function (v) { v.pause(); });
+      $$('.reel').forEach(function (c) { c.classList.remove('is-playing'); });
     });
   });
 
