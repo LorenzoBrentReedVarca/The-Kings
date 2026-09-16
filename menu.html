@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Menu | The Royals, Al Barsha</title>
-<meta name="description" content="The full bar and food menu at The Royals, Al Barsha. Prices in AED, in English and Arabic.">
+<meta name="description" content="The full menu at The Royals, Al Barsha: food, signature drinks, shisha and current offers. Every page in English and Arabic, priced in AED.">
 <meta name="theme-color" content="#050505">
 <script>document.documentElement.classList.add('js');</script>
 <link rel="canonical" href="https://the-kings-seven.vercel.app/menu">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Menu — The Royals">
-<meta property="og:description" content="The full bar and food menu at The Royals, Al Barsha. Prices in AED.">
+<meta property="og:description" content="Food, signature drinks, shisha and offers. English and Arabic, priced in AED.">
 <meta property="og:locale" content="en_AE">
 <meta property="og:image" content="https://the-kings-seven.vercel.app/assets/img/hero-poster.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,7 +21,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@200;300;400;500;600&family=Noto+Kufi+Arabic:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -106,6 +106,7 @@
 
     <div class="header__actions">
       <div class="locpick" data-location-picker hidden></div>
+      <a class="acct-link" href="account.html" aria-label="Your account" title="Your account"><svg viewBox="0 0 24 24"><use href="#i-users"></use></svg></a>
       <span class="status-pill" data-status-pill>
         <span class="status-pill__dot"></span>
         <span data-status-label>Closed</span>
@@ -135,6 +136,7 @@
     <a class="drawer__link" href="menu.html" data-menu-link><span>04</span>Menu</a>
     <a class="drawer__link" href="reservations.html"><span>05</span>Reserve</a>
     <a class="drawer__link" href="contact.html"><span>06</span>Contact</a>
+    <a class="drawer__link" href="account.html"><span>07</span>Account</a>
   </nav>
   <div class="drawer__foot">
     <div class="locpick" data-location-picker hidden></div>
@@ -153,907 +155,348 @@
 
 <main id="main">
 
-  <!-- ===================== MENU ===================== -->
   <section class="page-hero page-hero--menu">
     <div class="shell">
-      <span class="eyebrow eyebrow--lg is-centered" data-ar="القائمة" data-en="The Menu">The Menu</span>
-      <h1 data-ar="قائمة البار والطعام" data-en="Bar &amp; food">Bar &amp; <span class="script gold-text" data-ar="الطعام" data-en="food">food</span></h1>
-      <p class="lead" data-ar="جميع الأسعار بالدرهم الإماراتي." data-en="All prices in UAE Dirhams.">All prices in UAE Dirhams.</p>
-
-      <div class="langpick" role="group" aria-label="Menu language">
-        <button class="langpick__btn is-active" type="button" data-lang="en" lang="en">English</button>
-        <button class="langpick__btn" type="button" data-lang="ar" lang="ar">العربية</button>
-      </div>
-
-      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span data-ar="القائمة" data-en="Menu">Menu</span></nav>
+      <span class="eyebrow eyebrow--lg is-centered">The Menu</span>
+      <h1>Food, drinks <span class="script gold-text">&amp; shisha</span></h1>
+      <p class="lead">Every page in English and Arabic, priced in UAE Dirhams.
+        Tap any page to open it full size.</p>
+      <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span>Menu</nav>
     </div>
   </section>
 
   <section class="section section--tight">
     <div class="shell">
-      <div class="tabs" data-menu-tabs role="tablist" aria-label="Menu">
-        <button class="tab is-active" type="button" role="tab" data-menu-tab="bar" data-ar="قائمة البار" data-en="Bar Menu">Bar Menu</button>
-        <button class="tab" type="button" role="tab" data-menu-tab="food" data-ar="قائمة الطعام" data-en="Food Menu">Food Menu</button>
+      <div class="tabs" data-menu-tabs role="tablist" aria-label="Menu sections">
+        <button class="tab is-active" type="button" role="tab" data-menu-tab="food">Menu<span class="tab__count">27</span></button>
+        <button class="tab" type="button" role="tab" data-menu-tab="signature">Signature Drinks<span class="tab__count">1</span></button>
+        <button class="tab" type="button" role="tab" data-menu-tab="shisha">Shisha<span class="tab__count">1</span></button>
+        <button class="tab" type="button" role="tab" data-menu-tab="offers">Offers<span class="tab__count">4</span></button>
       </div>
 
-      <div class="menu" data-reveal>
-    <div data-menu-panel="bar">
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="جعة" data-en="Beer">Beer</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="هاينكن" data-en="Heineken">Heineken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بودوايزر" data-en="Budwiser">Budwiser</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كورونا" data-en="Corona">Corona</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بيرة مسودة نصف لتر" data-en="Draught Beer Pint">Draught Beer Pint</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بريزر" data-en="Breezer">Breezer</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الويسكي" data-en="Whisky">Whisky</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="ريد ليبل" data-en="Red Label">Red Label</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="شيفاز ريجال ١٢ عامًا" data-en="Chivas Regal 12 Years">Chivas Regal 12 Years</span></div>
-            <span class="menu__p">70</span>
-            <span class="menu__p">600</span>
-            <span class="menu__p">1200</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="شيفاز ريجال ١٨ عامًا" data-en="Chivas Regal 18 Years">Chivas Regal 18 Years</span></div>
-            <span class="menu__p">90</span>
-            <span class="menu__p">1000</span>
-            <span class="menu__p">2000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="رويال سالوت ٢١ عامًا" data-en="Royal Salute 21 Years">Royal Salute 21 Years</span></div>
-            <span class="menu__p">120</span>
-            <span class="menu__p">1600</span>
-            <span class="menu__p">3200</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جيه دبليو بلاك ليبل" data-en="J W Black Label">J W Black Label</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">600</span>
-            <span class="menu__p">1200</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جيه دبليو بلو ليبل" data-en="J W Blue Label">J W Blue Label</span></div>
-            <span class="menu__p">120</span>
-            <span class="menu__p">1600</span>
-            <span class="menu__p">3200</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="دوبل بلاك ليبل" data-en="Double Black Label">Double Black Label</span></div>
-            <span class="menu__p">80</span>
-            <span class="menu__p">800</span>
-            <span class="menu__p">1400</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جيه دبليو جولد ليبل" data-en="J W Gold Label">J W Gold Label</span></div>
-            <span class="menu__p">90</span>
-            <span class="menu__p">1000</span>
-            <span class="menu__p">2000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="شعير واحد" data-en="Single Malt">Single Malt</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جلينفيديتش ١٢ عامًا" data-en="Glenfiddich 12 Years">Glenfiddich 12 Years</span></div>
-            <span class="menu__p">70</span>
-            <span class="menu__p">600</span>
-            <span class="menu__p">1200</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جلينفيديتش ١٨ عامًا" data-en="Glenfiddich 18 Years">Glenfiddich 18 Years</span></div>
-            <span class="menu__p">90</span>
-            <span class="menu__p">1000</span>
-            <span class="menu__p">2000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="فودكا" data-en="Vodka">Vodka</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="أبسولوت" data-en="Absolute">Absolute</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="سميرنوف" data-en="Smirnoff">Smirnoff</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="أوزة رمادية" data-en="Grey Goose">Grey Goose</span></div>
-            <span class="menu__p">80</span>
-            <span class="menu__p">800</span>
-            <span class="menu__p">1600</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الروم والتكيلا" data-en="Rum &amp; Tequila">Rum &amp; Tequila</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="رم باكاردي" data-en="Bacardi Rum">Bacardi Rum</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="كابتن مورجان" data-en="Captain Morgan">Captain Morgan</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="تيكيلا خوسيه كويرفو" data-en="Tequila Jose Cuervo">Tequila Jose Cuervo</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="جين" data-en="Gin">Gin</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="ياقوت بومباي" data-en="Bombay Saphire">Bombay Saphire</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جوردون دراي" data-en="Gordan's Dry">Gordan's Dry</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="ويسكي بوربون" data-en="Bourbon Whisky">Bourbon Whisky</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="جاك دانييل" data-en="Jack Daniel">Jack Daniel</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="براندي" data-en="Brandy">Brandy</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="هينيسي (VSOP)" data-en="Hennessy (VSOP)">Hennessy (VSOP)</span></div>
-            <span class="menu__p">80</span>
-            <span class="menu__p">800</span>
-            <span class="menu__p">1600</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="ريمي مارتن" data-en="Remy Martin">Remy Martin</span></div>
-            <span class="menu__p">70</span>
-            <span class="menu__p">750</span>
-            <span class="menu__p">1500</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="ثلاثة براميل" data-en="Three Barrels">Three Barrels</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="كونياك" data-en="Cognac">Cognac</h3>
-        <ul class="menu__list menu__list--measures">
-          <li class="menu__head" aria-hidden="true">
-            <span></span>
-            <span class="menu__p" data-ar="٣٠ مل" data-en="30ml">30ml</span>
-            <span class="menu__p" data-ar="نصف" data-en="Half">Half</span>
-            <span class="menu__p" data-ar="كامل" data-en="Full">Full</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="هينيسي (VS)" data-en="Hennessy (VS)">Hennessy (VS)</span></div>
-            <span class="menu__p">60</span>
-            <span class="menu__p">500</span>
-            <span class="menu__p">1000</span>
-          </li>
-          <li class="menu__row menu__row--measures">
-            <div class="menu__name"><span data-ar="هينيسي (VSOP)" data-en="Hennessy (VSOP)">Hennessy (VSOP)</span></div>
-            <span class="menu__p">80</span>
-            <span class="menu__p">800</span>
-            <span class="menu__p">1600</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="نبيذ" data-en="Wine">Wine</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="نبيذ أحمر/أبيض بالكأس" data-en="Red / White Wine By Glass">Red / White Wine By Glass</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70 / 350</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="نبيذ أحمر/أبيض ممتاز" data-en="Red / White Wine Premium">Red / White Wine Premium</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">300 / 350</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كوكس" data-en="Cook's">Cook's</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">400</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مويت شاندون" data-en="Moet Chandon">Moet Chandon</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">1000</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الرماة" data-en="Shooters">Shooters</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="انتحاري" data-en="Kamakaze">Kamakaze</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="جايجرمايستر" data-en="Jagermiester">Jagermiester</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="نزيف في المخ" data-en="Brain Hemorrhage">Brain Hemorrhage</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ب – ٥٢" data-en="B – 52">B – 52</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="كوكتيل" data-en="Cocktail">Cocktail</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ضفدع الثور" data-en="Bull Frog">Bull Frog</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">120</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="لونغ آيلاند" data-en="Long Island">Long Island</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">120</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="موهيتو" data-en="Mojito">Mojito</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مارغريتا" data-en="Margarita">Margarita</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سيكس أون ذا بيتش" data-en="Sex on The Beach">Sex on The Beach</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60 / 100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="لامبورجيني المشتعلة" data-en="Flaming Lamborghini">Flaming Lamborghini</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">150</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بيناكولادا" data-en="Pinacolada">Pinacolada</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="كوكتيل غير كحولي" data-en="Mocktail">Mocktail</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="موخيتو" data-en="Mojito">Mojito</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مريم العذراء" data-en="V. Mary">V. Mary</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="فيرجن بينا كولادا" data-en="V. Pinacolada">V. Pinacolada</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الزاوية الناعمة" data-en="Soft Corner">Soft Corner</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ريد بول" data-en="Red Bull">Red Bull</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="عصير طازج" data-en="Fresh Juice">Fresh Juice</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="عصير / مزيج ريد بول" data-en="Juice / Red Bull Mix">Juice / Red Bull Mix</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">30</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شاي / قهوة" data-en="Tea / Coffee">Tea / Coffee</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مشروبات غازية / متنوعة" data-en="Soft Drinks / Assorted">Soft Drinks / Assorted</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مياه معدنية" data-en="Mineral Water">Mineral Water</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">30</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مياه بيرير" data-en="Perrier Water">Perrier Water</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-        </ul>
-      </section>
+      <div class="menu-pages" data-reveal>
+    <div data-menu-panel="food">
+      <div class="gallery gallery--menu">
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-01.jpg"
+                 data-title="Menu" data-caption="Page 1 of 27">
+          <img src="assets/menu/food-01.jpg" alt="Menu, page 1 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 1</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-02.jpg"
+                 data-title="Menu" data-caption="Page 2 of 27">
+          <img src="assets/menu/food-02.jpg" alt="Menu, page 2 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 2</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-03.jpg"
+                 data-title="Menu" data-caption="Page 3 of 27">
+          <img src="assets/menu/food-03.jpg" alt="Menu, page 3 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 3</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-04.jpg"
+                 data-title="Menu" data-caption="Page 4 of 27">
+          <img src="assets/menu/food-04.jpg" alt="Menu, page 4 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 4</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-05.jpg"
+                 data-title="Menu" data-caption="Page 5 of 27">
+          <img src="assets/menu/food-05.jpg" alt="Menu, page 5 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 5</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-06.jpg"
+                 data-title="Menu" data-caption="Page 6 of 27">
+          <img src="assets/menu/food-06.jpg" alt="Menu, page 6 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 6</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-07.jpg"
+                 data-title="Menu" data-caption="Page 7 of 27">
+          <img src="assets/menu/food-07.jpg" alt="Menu, page 7 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 7</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-08.jpg"
+                 data-title="Menu" data-caption="Page 8 of 27">
+          <img src="assets/menu/food-08.jpg" alt="Menu, page 8 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 8</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-09.jpg"
+                 data-title="Menu" data-caption="Page 9 of 27">
+          <img src="assets/menu/food-09.jpg" alt="Menu, page 9 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 9</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-10.jpg"
+                 data-title="Menu" data-caption="Page 10 of 27">
+          <img src="assets/menu/food-10.jpg" alt="Menu, page 10 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 10</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-11.jpg"
+                 data-title="Menu" data-caption="Page 11 of 27">
+          <img src="assets/menu/food-11.jpg" alt="Menu, page 11 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 11</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-12.jpg"
+                 data-title="Menu" data-caption="Page 12 of 27">
+          <img src="assets/menu/food-12.jpg" alt="Menu, page 12 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 12</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-13.jpg"
+                 data-title="Menu" data-caption="Page 13 of 27">
+          <img src="assets/menu/food-13.jpg" alt="Menu, page 13 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 13</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-14.jpg"
+                 data-title="Menu" data-caption="Page 14 of 27">
+          <img src="assets/menu/food-14.jpg" alt="Menu, page 14 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 14</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-15.jpg"
+                 data-title="Menu" data-caption="Page 15 of 27">
+          <img src="assets/menu/food-15.jpg" alt="Menu, page 15 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 15</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-16.jpg"
+                 data-title="Menu" data-caption="Page 16 of 27">
+          <img src="assets/menu/food-16.jpg" alt="Menu, page 16 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 16</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-17.jpg"
+                 data-title="Menu" data-caption="Page 17 of 27">
+          <img src="assets/menu/food-17.jpg" alt="Menu, page 17 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 17</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-18.jpg"
+                 data-title="Menu" data-caption="Page 18 of 27">
+          <img src="assets/menu/food-18.jpg" alt="Menu, page 18 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 18</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-19.jpg"
+                 data-title="Menu" data-caption="Page 19 of 27">
+          <img src="assets/menu/food-19.jpg" alt="Menu, page 19 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 19</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-20.jpg"
+                 data-title="Menu" data-caption="Page 20 of 27">
+          <img src="assets/menu/food-20.jpg" alt="Menu, page 20 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 20</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-21.jpg"
+                 data-title="Menu" data-caption="Page 21 of 27">
+          <img src="assets/menu/food-21.jpg" alt="Menu, page 21 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 21</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-22.jpg"
+                 data-title="Menu" data-caption="Page 22 of 27">
+          <img src="assets/menu/food-22.jpg" alt="Menu, page 22 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 22</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-23.jpg"
+                 data-title="Menu" data-caption="Page 23 of 27">
+          <img src="assets/menu/food-23.jpg" alt="Menu, page 23 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 23</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-24.jpg"
+                 data-title="Menu" data-caption="Page 24 of 27">
+          <img src="assets/menu/food-24.jpg" alt="Menu, page 24 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 24</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-25.jpg"
+                 data-title="Menu" data-caption="Page 25 of 27">
+          <img src="assets/menu/food-25.jpg" alt="Menu, page 25 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 25</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-26.jpg"
+                 data-title="Menu" data-caption="Page 26 of 27">
+          <img src="assets/menu/food-26.jpg" alt="Menu, page 26 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 26</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/food-27.jpg"
+                 data-title="Menu" data-caption="Page 27 of 27">
+          <img src="assets/menu/food-27.jpg" alt="Menu, page 27 of 27" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Menu</h4><p>Page 27</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+      </div>
     </div>
 
-    <div data-menu-panel="food" hidden>
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="سلطة" data-en="Salad's">Salad's</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سلطة يونانية" data-en="Greek Salad">Greek Salad</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سلطة الهيمالايا" data-en="Himalayan Salad">Himalayan Salad</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سلطة سيزر" data-en="Caesar Salad">Caesar Salad</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سلطة خضراء عربية مميزة" data-en="Royals Special Arabic Green Salad">Royals Special Arabic Green Salad</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-        </ul>
-      </section>
+    <div data-menu-panel="signature" hidden>
+      <div class="gallery gallery--menu">
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/signature-01.jpg"
+                 data-title="Signature Drinks" data-caption="Page 1 of 1">
+          <img src="assets/menu/signature-01.jpg" alt="Signature Drinks, page 1 of 1" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Signature Drinks</h4><p>Page 1</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
 
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="حساءات" data-en="Soups">Soups</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة توم يام" data-en="Tom Yum Soup">Tom Yum Soup</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة كريمة الفطر" data-en="Cream of Mushroom Soup">Cream of Mushroom Soup</span><span class="menu__sub" data-ar="خضار / دجاج / روبيان" data-en="Veg / Chicken / Prawns">Veg / Chicken / Prawns</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50 / 60 / 70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة كريمة الفطر" data-en="Cream Mushroom Soup">Cream Mushroom Soup</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة مانشو" data-en="Manchow Soup">Manchow Soup</span><span class="menu__sub" data-ar="خضار / دجاج" data-en="Veg / Chicken">Veg / Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50 / 70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة حارة وحامضة" data-en="Hot &amp; Sour Soup">Hot &amp; Sour Soup</span><span class="menu__sub" data-ar="خضار / دجاج" data-en="Veg / Chicken">Veg / Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50 / 60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="شوربة العدس المميزة" data-en="Royals Special Lentil Soup">Royals Special Lentil Soup</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-        </ul>
-      </section>
+    <div data-menu-panel="shisha" hidden>
+      <div class="gallery gallery--menu">
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/shisha-01.jpg"
+                 data-title="Shisha" data-caption="Page 1 of 1">
+          <img src="assets/menu/shisha-01.jpg" alt="Shisha, page 1 of 1" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Shisha</h4><p>Page 1</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
 
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="مقبلات مميزة" data-en="Appetizer Royals Special">Appetizer Royals Special</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="حمص" data-en="Hummus">Hummus</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">40</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="متبل" data-en="Mutabal">Mutabal</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">40</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="تبولة" data-en="Tabbouleh">Tabbouleh</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">40</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="فتوش" data-en="Fattoush">Fattoush</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">40</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="مقبلات نباتية" data-en="Veg Starters">Veg Starters</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="الخضار باكورا" data-en="Veg Pakora">Veg Pakora</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="هارا بهارا كباب" data-en="Hara Bhara Kebab">Hara Bhara Kebab</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بطاطس مقلية" data-en="French Fries">French Fries</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بانير تكا" data-en="Paneer Tikka">Paneer Tikka</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بانير بارد" data-en="Chilly Paneer">Chilly Paneer</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="الخضار منشوريا" data-en="Veg Manchurian">Veg Manchurian</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="موموس الخضار" data-en="Veg Momos">Veg Momos</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="الخضار سيخ كباب" data-en="Veg Sheekh Kebab">Veg Sheekh Kebab</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="فلفل حار (فطر / ذرة صغيرة)" data-en="Chilly (Mushroom / Baby Corn)">Chilly (Mushroom / Baby Corn)</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="طبق الخضار المميز" data-en="Veg Platter Royals Special">Veg Platter Royals Special</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">200</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="مقبلات غير نباتية" data-en="Non – Veg Starters">Non – Veg Starters</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="روبيان مقلي ذهبي اللون" data-en="Golden Fried Prawns">Golden Fried Prawns</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="روبيان تندوري" data-en="Tandoori Prawns">Tandoori Prawns</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="أصابع السمك" data-en="Fish Finger">Fish Finger</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سمك تيكا" data-en="Fish Tikka">Fish Tikka</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج تندوري (نصف)" data-en="Tandoori Chicken (Half)">Tandoori Chicken (Half)</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج تيكا" data-en="Chicken Tikka">Chicken Tikka</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج باكورا" data-en="Chicken Pakora">Chicken Pakora</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج لولي بوب" data-en="Chicken Lolypop">Chicken Lolypop</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج حار" data-en="Chilly Chicken">Chilly Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج ٦٥" data-en="Chicken 65">Chicken 65</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="سيخ كباب دجاج" data-en="Chicken Seekh Kabab">Chicken Seekh Kabab</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="طبق غير نباتي مميز" data-en="Non – Veg Platter (Royals Special)">Non – Veg Platter (Royals Special)</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">250</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الطبق الرئيسي الخضار" data-en="Main Course Veg">Main Course Veg</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ألو غوبهي ادراكي" data-en="Aloo Gobhi Adraki">Aloo Gobhi Adraki</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="باجارا بينجان / بينجان بهارتا" data-en="Bangara Beigan / Beigan Bharta">Bangara Beigan / Beigan Bharta</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بانير تكا زبدة ماسالا" data-en="Paneer Tikka Butter Masala">Paneer Tikka Butter Masala</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بانير بالاك" data-en="Paneer Palak">Paneer Palak</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كاداي بانير" data-en="Kadhai Paneer">Kadhai Paneer</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="الخضار كولابوري" data-en="Veg Kolapuri">Veg Kolapuri</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بهندي ماسالا" data-en="Bhindi Masala">Bhindi Masala</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="مزيج الخضار" data-en="Mix Veg">Mix Veg</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="جيرا ألو" data-en="Jeera Aloo">Jeera Aloo</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دال مخني" data-en="Dal Makhni">Dal Makhni</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دال تادكا" data-en="Dal Tadka">Dal Tadka</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الطبق الرئيسي غير نباتي" data-en="Main Course Non – Veg">Main Course Non – Veg</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="روبيان مسالدار" data-en="Prawns Masaladar">Prawns Masaladar</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="روبيان بالكاري" data-en="Prawns Curry">Prawns Curry</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كاري السمك / ماسالا" data-en="Fish Curry / Masala">Fish Curry / Masala</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">90</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج تكا ماسالا" data-en="Chicken Tikka Masala">Chicken Tikka Masala</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">90</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج بالزبدة" data-en="Butter Chicken">Butter Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">90</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="دجاج كاداي" data-en="Kadhai Chicken">Kadhai Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">90</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كاري الدجاج" data-en="Chicken Curry">Chicken Curry</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="صاغ دجاج" data-en="Saag Chicken">Saag Chicken</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="لحم الضأن روجان جوش" data-en="Mutton Roghan Josh">Mutton Roghan Josh</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">110</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="لحم ضأن كاداي" data-en="Kadhai Mutton">Kadhai Mutton</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="لحم ضأن ماسالا" data-en="Mutton Masala">Mutton Masala</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="صاغ لحم ضأن" data-en="Saag Mutton">Saag Mutton</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الساندويتشات" data-en="Sandwiches">Sandwiches</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ساندويتشات نباتية" data-en="Veg Sandwiches">Veg Sandwiches</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="ساندويتشات دجاج" data-en="Chicken Sandwiches">Chicken Sandwiches</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="برجر" data-en="Burger">Burger</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="الخبز" data-en="Breads">Breads</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="روتي" data-en="Roti">Roti</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">15</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="جباتي" data-en="Chapati">Chapati</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">20</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="نان" data-en="Naan">Naan</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">20</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="باراثا" data-en="Paratha">Paratha</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">25</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="كولشا محشوة" data-en="Stuffed Kulcha">Stuffed Kulcha</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">30</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="menu__group">
-        <h3 class="menu__title" data-ar="أرز" data-en="Rice">Rice</h3>
-        <ul class="menu__list">
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="أرز مطهو على البخار" data-en="Steam Rice">Steam Rice</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">50</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بولاو نباتي" data-en="Veg Pulao">Veg Pulao</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">70</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="بولاو كشميري" data-en="Kashmiri Pulao">Kashmiri Pulao</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="برياني نباتي" data-en="Veg Biryani">Veg Biryani</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">90</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="برياني دجاج" data-en="Chicken Biryani">Chicken Biryani</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="برياني لحم ضأن" data-en="Mutton Biryani">Mutton Biryani</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="برياني روبيان" data-en="Prawns Biryani">Prawns Biryani</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">120</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="أرز مقلي نباتي" data-en="Veg Fried Rice">Veg Fried Rice</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">60</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="أرز مقلي بالدجاج" data-en="Chicken Fried Rice">Chicken Fried Rice</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">80</span>
-          </li>
-          <li class="menu__row">
-            <div class="menu__name"><span data-ar="أرز مقلي بالروبيان" data-en="Prawns Fried Rice">Prawns Fried Rice</span></div>
-            <span class="menu__dots" aria-hidden="true"></span>
-            <span class="menu__p">100</span>
-          </li>
-        </ul>
-      </section>
+    <div data-menu-panel="offers" hidden>
+      <div class="gallery gallery--menu">
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/offers-01.jpg"
+                 data-title="Offers" data-caption="Page 1 of 4">
+          <img src="assets/menu/offers-01.jpg" alt="Offers, page 1 of 4" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Offers</h4><p>Page 1</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/offers-02.jpg"
+                 data-title="Offers" data-caption="Page 2 of 4">
+          <img src="assets/menu/offers-02.jpg" alt="Offers, page 2 of 4" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Offers</h4><p>Page 2</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/offers-03.jpg"
+                 data-title="Offers" data-caption="Page 3 of 4">
+          <img src="assets/menu/offers-03.jpg" alt="Offers, page 3 of 4" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Offers</h4><p>Page 3</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+        <figure class="gallery__item" tabindex="0" role="button"
+                 data-full="assets/menu/offers-04.jpg"
+                 data-title="Offers" data-caption="Page 4 of 4">
+          <img src="assets/menu/offers-04.jpg" alt="Offers, page 4 of 4" loading="lazy" decoding="async" width="1100" height="1550">
+          <figcaption class="gallery__cap">
+            <div><h4>Offers</h4><p>Page 4</p></div>
+            <span class="gallery__zoom"><svg viewBox="0 0 24 24"><use href="#i-zoom"></use></svg></span>
+          </figcaption>
+        </figure>
+      </div>
     </div>
       </div>
 
-      <p class="menu__note" data-ar="جميع الأسعار شاملة رسوم البلدية ٧٪ ورسوم الخدمة ١٠٪ وضريبة القيمة المضافة ٥٪." data-en="All prices are inclusive of 7% Municipality Fee, 10% Service Charges and 5% VAT.">All prices are inclusive of 7% Municipality Fee, 10% Service Charges and 5% VAT.</p>
+      <p class="menu__note">
+        Please inform your F&amp;B attendant of any allergies or dietary restrictions.
+        All prices are inclusive of 7% Municipality Fee, 10% Service Charges and 5% VAT.
+      </p>
     </div>
   </section>
 
@@ -1106,6 +549,7 @@
           <a href="menu.html" data-menu-link>Menu</a>
           <a href="reservations.html">Reservations</a>
           <a href="contact.html">Contact</a>
+          <a href="account.html">Account</a>
         </nav>
       </div>
 
@@ -1163,6 +607,20 @@
   <button class="fab fab--top" type="button" aria-label="Back to top">
     <svg viewBox="0 0 24 24" style="transform:rotate(-90deg)"><use href="#i-arrow"></use></svg>
   </button>
+</div>
+
+<!-- ===================== LIGHTBOX ===================== -->
+<div class="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24"><use href="#i-x"></use></svg></button>
+  <div class="lightbox__stage">
+    <button class="lb-btn lb-prev" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24"><use href="#i-left"></use></svg></button>
+    <img data-lb-img alt="">
+    <button class="lb-btn lb-next" type="button" aria-label="Next image"><svg viewBox="0 0 24 24"><use href="#i-right"></use></svg></button>
+    <div class="lightbox__meta">
+      <span><b data-lb-cap></b> · <span data-lb-cat></span></span>
+      <span data-lb-index></span>
+    </div>
+  </div>
 </div>
 
 <script src="assets/js/main.js"></script>

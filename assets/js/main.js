@@ -774,10 +774,12 @@
      14. GALLERY FILTER + LIGHTBOX
      ================================================================== */
   safe('gallery', function () {
-    var grid = $('.gallery');
-    if (!grid) return;
+    // The menu page carries one grid per section, so collect items from every
+    // grid rather than the first. Scoping to $('.gallery') left the lightbox
+    // working only on whichever section happened to be first in the markup.
+    if (!$('.gallery')) return;
 
-    var items = $$('.gallery__item', grid);
+    var items = $$('.gallery__item');
 
     // --- filters
     // Two levels: the granular categories, and the two groupings the header
@@ -876,7 +878,17 @@
     var idxEl = $('[data-lb-index]', box);
     var current = 0;
 
-    function visible() { return items.filter(function (i) { return !i.classList.contains('is-hidden'); }); }
+    /* What the lightbox may step through: not filtered out by category, and
+       not sitting inside a section tab that is closed. Checked through the
+       DOM rather than via offsetParent, because that depends on layout and
+       reads as null in environments that do not lay pages out at all. */
+    function visible() {
+      return items.filter(function (i) {
+        if (i.classList.contains('is-hidden')) return false;
+        var panel = i.closest('[hidden]');
+        return !panel;
+      });
+    }
 
     function show(i) {
       var list = visible();
