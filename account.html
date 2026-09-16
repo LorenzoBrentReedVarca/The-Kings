@@ -181,7 +181,7 @@
             <span class="field__error"></span>
           </div>
           <div class="form__actions">
-            <button class="btn btn--gold" type="submit">Sign in <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
+            <button class="btn btn--gold" type="submit" data-busy="Signing in…">Sign in <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
           </div>
         </form>
 
@@ -203,7 +203,7 @@
             <span class="field__hint">Eight characters or more.</span>
           </div>
           <div class="form__actions">
-            <button class="btn btn--gold" type="submit">Create account <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
+            <button class="btn btn--gold" type="submit" data-busy="Creating…">Create account <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
           </div>
         </form>
 
@@ -220,7 +220,7 @@
       <!-- signed in -->
       <div class="auth__card" data-auth-panel="account" hidden>
         <span class="eyebrow">Signed in</span>
-        <h2 class="auth__who" data-auth-email>—</h2>
+        <h2 class="auth__who" data-auth-name>—</h2>
         <dl class="review-list mt-2">
           <div><dt>Email</dt><dd data-auth-email>—</dd></div>
           <div><dt>Member since</dt><dd data-auth-since>—</dd></div>
