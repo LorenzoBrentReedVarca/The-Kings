@@ -67,6 +67,18 @@
   ],
   "redirects": [
     {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.theroyalseminentlounge.com" }],
+      "destination": "https://theroyalseminentlounge.com/$1",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "the-kings-seven.vercel.app" }],
+      "destination": "https://theroyalseminentlounge.com/$1",
+      "permanent": true
+    },
+    {
       "source": "/book",
       "destination": "/reservations",
       "permanent": false
