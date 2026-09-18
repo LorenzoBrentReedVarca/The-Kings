@@ -179,9 +179,28 @@
             <label for="si-password">Password <span class="req">*</span></label>
             <input type="password" id="si-password" name="password" autocomplete="current-password" placeholder="••••••••" required>
             <span class="field__error"></span>
+            <span class="field__hint">
+              <a href="#" data-auth-show="reset" style="color:var(--gold)">Forgotten your password?</a>
+            </span>
           </div>
           <div class="form__actions">
             <button class="btn btn--gold" type="submit" data-busy="Signing in…">Sign in <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
+          </div>
+        </form>
+
+        <!-- ask for a reset link -->
+        <form class="form" id="reset-form" data-auth-form="reset" hidden novalidate>
+          <p class="small muted" style="margin-top:0">
+            Enter the email address on your account and we will send you a link to choose a new password.
+          </p>
+          <div class="field">
+            <label for="rs-email">Email address <span class="req">*</span></label>
+            <input type="email" id="rs-email" name="email" autocomplete="email" placeholder="you@example.com" required>
+            <span class="field__error"></span>
+          </div>
+          <div class="form__actions">
+            <button class="btn btn--gold" type="submit" data-busy="Sending…">Send the link <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
+            <button class="btn btn--ghost" type="button" data-auth-show="signin">Back to sign in</button>
           </div>
         </form>
 
@@ -228,6 +247,38 @@
         <div class="form__actions mt-2">
           <a class="btn btn--gold" href="reservations.html">Book a table <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></a>
           <button class="btn btn--ghost" type="button" data-auth-signout>Sign out</button>
+        </div>
+      </div>
+
+      <!-- arrived from a reset link -->
+      <div class="auth__card" data-auth-panel="newpassword" hidden>
+        <span class="eyebrow">Almost there</span>
+        <h2 class="auth__who">Choose a new password</h2>
+
+        <form class="form mt-2" id="newpass-form" novalidate>
+          <div class="field">
+            <label for="np-password">New password <span class="req">*</span></label>
+            <input type="password" id="np-password" name="password" autocomplete="new-password" placeholder="At least 8 characters" required>
+            <span class="field__error"></span>
+            <span class="field__hint">Eight characters or more.</span>
+          </div>
+          <div class="field">
+            <label for="np-confirm">Confirm new password <span class="req">*</span></label>
+            <input type="password" id="np-confirm" name="confirm" autocomplete="new-password" placeholder="••••••••" required>
+            <span class="field__error"></span>
+          </div>
+          <div class="form__actions">
+            <button class="btn btn--gold" type="submit" data-busy="Saving…">Save new password <svg viewBox="0 0 24 24"><use href="#i-arrow"></use></svg></button>
+          </div>
+        </form>
+
+        <div class="form-note form-note--ok">
+          <svg viewBox="0 0 24 24"><use href="#i-check-circle"></use></svg>
+          <div data-note-body></div>
+        </div>
+        <div class="form-note form-note--err">
+          <svg viewBox="0 0 24 24"><use href="#i-alert"></use></svg>
+          <div data-note-body></div>
         </div>
       </div>
 
