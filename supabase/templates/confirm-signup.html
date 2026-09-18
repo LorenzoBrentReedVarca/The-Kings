@@ -1,0 +1,176 @@
+<!--
+  THE ROYALS — "Confirm signup" email
+  Paste into: Supabase -> Authentication -> Emails -> Confirm signup
+
+  Built the way email has to be built rather than the way the site is: tables
+  for layout, colours inlined on every cell, and a button that is a table cell
+  with a background rather than a styled link, because Outlook ignores padding
+  on anchors. The 600px width is the widest that survives Outlook's rendering.
+
+  Cinzel and Cormorant are pulled in for the clients that honour @import —
+  Apple Mail and iOS — and everywhere else the stack falls back to Georgia and
+  Times New Roman, which keeps the serif character without the download.
+
+  Go template variables Supabase substitutes:
+    {{ .ConfirmationURL }}   the confirm link
+    {{ .Email }}             the address that signed up
+    {{ .Data.full_name }}    from the sign-up form's name field
+-->
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
+<title>Confirm your account</title>
+<!--[if mso]>
+<noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+<![endif]-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+  body { margin:0; padding:0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img { border:0; line-height:100%; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; }
+  a { text-decoration:none; }
+  .lift:hover { opacity:.88 !important; }
+  @media only screen and (max-width:620px) {
+    .wrap   { width:100% !important; }
+    .pad    { padding-left:24px !important; padding-right:24px !important; }
+    .h1     { font-size:27px !important; }
+    .btn a  { display:block !important; }
+  }
+</style>
+</head>
+<body style="margin:0; padding:0; background:#040405;">
+
+<!-- preheader: the grey line of text shown beside the subject in most inboxes -->
+<div style="display:none; font-size:1px; color:#040405; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
+  Confirm your email and your table at The Royals is one tap away.
+  &#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;&#8199;
+</div>
+
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#040405;">
+<tr>
+<td align="center" style="padding:40px 12px;">
+
+  <table role="presentation" class="wrap" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
+
+    <!-- gold hairline across the top of the card -->
+    <tr><td style="height:3px; line-height:3px; font-size:0; background:#d4af37;">&nbsp;</td></tr>
+
+    <tr>
+    <td class="pad" style="background:#0d0d10; padding:44px 48px 40px 48px; border-left:1px solid rgba(212,175,55,.18); border-right:1px solid rgba(212,175,55,.18);">
+
+      <!-- logo -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr><td align="center" style="padding-bottom:26px;">
+          <img src="https://theroyalseminentlounge.com/assets/img/logo-royals.png"
+               width="176" height="106" alt="The Royals"
+               style="display:block; width:176px; height:auto; max-width:176px;">
+        </td></tr>
+      </table>
+
+      <!-- flourish -->
+      <table role="presentation" align="center" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 26px auto;">
+        <tr>
+          <td style="width:64px; height:1px; line-height:1px; font-size:0; background:rgba(212,175,55,.32);">&nbsp;</td>
+          <td style="padding:0 11px; font-family:Georgia,'Times New Roman',serif; font-size:11px; color:#d4af37; line-height:1;">&#9670;</td>
+          <td style="width:64px; height:1px; line-height:1px; font-size:0; background:rgba(212,175,55,.32);">&nbsp;</td>
+        </tr>
+      </table>
+
+      <!-- eyebrow -->
+      <p style="margin:0 0 12px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:#a8a49b;">
+        An Eminent Indian Lounge
+      </p>
+
+      <!-- heading -->
+      <h1 class="h1" style="margin:0 0 20px 0; text-align:center; font-family:'Cinzel',Georgia,'Times New Roman',serif; font-size:31px; line-height:1.22; font-weight:600; color:#f6e27a; mso-line-height-rule:exactly;">
+        Confirm your account
+      </h1>
+
+      <!-- body -->
+      <p style="margin:0 0 16px 0; font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif; font-size:18px; line-height:1.62; color:#ece9e2;">
+        {{ if .Data.full_name }}Dear {{ .Data.full_name }},{{ else }}Welcome,{{ end }}
+      </p>
+
+      <p style="margin:0 0 30px 0; font-family:'Cormorant Garamond',Georgia,'Times New Roman',serif; font-size:18px; line-height:1.62; color:#ece9e2;">
+        Thank you for creating an account with us. Confirm your email address below
+        and your details will be remembered, so reserving a table takes moments —
+        and you will hear first about event nights and table drops.
+      </p>
+
+      <!-- button -->
+      <table role="presentation" class="btn" align="center" cellpadding="0" cellspacing="0" border="0" style="margin:0 auto 26px auto;">
+        <tr>
+          <td align="center" bgcolor="#d4af37" style="background:#d4af37; border-radius:2px;">
+            <a class="lift" href="{{ .ConfirmationURL }}"
+               style="display:inline-block; padding:15px 42px; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:#0d0d10; text-decoration:none;">
+              Confirm my account
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <!-- fallback link -->
+      <p style="margin:0 0 6px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.6; color:#6f6c66;">
+        Button not working? Paste this into your browser:
+      </p>
+      <p style="margin:0 0 30px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.6; word-break:break-all;">
+        <a href="{{ .ConfirmationURL }}" style="color:#d4af37; text-decoration:underline;">{{ .ConfirmationURL }}</a>
+      </p>
+
+      <!-- divider -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr><td style="height:1px; line-height:1px; font-size:0; background:rgba(255,255,255,.07);">&nbsp;</td></tr>
+      </table>
+
+      <p style="margin:24px 0 0 0; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.7; color:#6f6c66;">
+        This link expires in 24 hours and can be used once. If you did not create an
+        account with The Royals, you can ignore this email — nothing has been set up,
+        and no one can use your address without this confirmation.
+      </p>
+
+    </td>
+    </tr>
+
+    <!-- footer -->
+    <tr>
+    <td class="pad" style="background:#08080a; padding:28px 48px 34px 48px; border:1px solid rgba(212,175,55,.18); border-top:0;">
+
+      <p style="margin:0 0 6px 0; text-align:center; font-family:'Cinzel',Georgia,'Times New Roman',serif; font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:#d4af37;">
+        The Royals
+      </p>
+      <p style="margin:0 0 4px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.75; color:#a8a49b;">
+        Grand Excelsior Hotel, 60th Street<br>
+        Al Barsha 1, Dubai, UAE
+      </p>
+      <p style="margin:0 0 16px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.75; color:#a8a49b;">
+        Doors 9:00 PM &ndash; 4:00 AM
+      </p>
+
+      <p style="margin:0 0 18px 0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:12px; line-height:1.75;">
+        <a href="https://theroyalseminentlounge.com" style="color:#d4af37; text-decoration:none;">Website</a>
+        <span style="color:#3a3a3f;">&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+        <a href="https://theroyalseminentlounge.com/reservations" style="color:#d4af37; text-decoration:none;">Reserve a table</a>
+        <span style="color:#3a3a3f;">&nbsp;&nbsp;&middot;&nbsp;&nbsp;</span>
+        <a href="https://wa.me/971542921626" style="color:#d4af37; text-decoration:none;">WhatsApp</a>
+      </p>
+
+      <p style="margin:0; text-align:center; font-family:'Jost','Segoe UI',Arial,sans-serif; font-size:11px; line-height:1.7; color:#55534e;">
+        Sent to {{ .Email }} because an account was created at theroyalseminentlounge.com
+      </p>
+
+    </td>
+    </tr>
+
+  </table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
