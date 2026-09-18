@@ -92,6 +92,13 @@
     if (/user already registered|already been registered/i.test(m)) return 'There is already an account with that email. Try signing in instead.';
     if (/rate limit|too many requests/i.test(m)) return 'Too many attempts just now. Please wait a minute and try again.';
     if (/failed to fetch|network/i.test(m)) return 'We could not reach the server. Check your connection and try again.';
+    /* When the mail server refuses, the account is not created and the guest
+       can do nothing about it. Give them the door that always works. */
+    if (/error sending|sending .*email|smtp/i.test(m)) {
+      return 'We could not send your confirmation email just now. Please try again shortly — ' +
+             'or message us on <a href="/whatsapp" style="color:var(--gold)">WhatsApp</a> ' +
+             'and we will arrange your table directly.';
+    }
     return m;
   }
 
